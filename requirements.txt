@@ -3,7 +3,6 @@ dash_auth
 dash_mantine_components
 Flask==2.2.5
 pandas
-pdftables_api
 plotly
 tabula
 tabula_py
