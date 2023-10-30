@@ -1,7 +1,7 @@
 # Module Imports
 from dash import register_page, html
 import dash_mantine_components as dmc
-from os import listdir
+from os import listdir, path
 import pandas as pd
 from unidecode import unidecode as ud
 
@@ -11,8 +11,8 @@ register_page(__name__, path="/sinav", path_template="sinav/<ogr_yili>_<sinav_no
 def layout(ogr_yili, sinav_no):
     df_path, df = None, None
     try:
-        for i in listdir(f"database\\{ogr_yili}"):
-            if float(str(sinav_no).strip()) == float(str(i.split(" - ")[0]).strip()): df_path = f"database\\{ogr_yili}\\{i}"
+        for i in listdir(path.join("database", str(ogr_yili))):
+            if float(str(sinav_no).strip()) == float(str(i.split(" - ")[0]).strip()): df_path = path.join("database", str(ogr_yili), str(i))
         if df_path != None: df = pd.read_excel(df_path)
     except: df_path, df = None, None
 
