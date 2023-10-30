@@ -66,6 +66,7 @@ class MHALAuth(Auth):
 
 # App
 app = Dash(__name__, use_pages=True, serve_locally=True, title="MHAL Panel", update_title="MHAL Panel", meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,"}])
+server = app.server
 auth = MHALAuth(app)
 app._favicon = "favicon.png"
 
