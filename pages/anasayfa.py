@@ -42,9 +42,8 @@ def layout():
                         html.Thead(html.Tr([html.Th("Numara"), html.Th("İsim"), html.Th("Sınıf")])),
                         html.Tbody([], id="sorgu-ogrenci-table")
                     ],
-                    highlightOnHover=True,
+                    highlightOnHover=False,
                     withBorder=True,
-                    striped=True,
                     verticalSpacing=10,
                     style={"zoom": "80%"}
                 )
