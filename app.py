@@ -1,16 +1,15 @@
 # Module Imports
-import logging, base64, flask, os, base64, dash_mantine_components as dmc
+import base64, flask, os, dash_mantine_components as dmc
 from dash import Dash, page_container, Output, Input, State, html
 from dash_auth.auth import Auth
 from datetime import datetime
 from os import listdir
 import pandas as pd
 from unidecode import unidecode as ud
-import plotly.express as px
 
 # Logs
-log = logging.getLogger("werkzeug")
-#log.setLevel(logging.WARNING)
+# log = logging.getLogger("werkzeug")
+# log.setLevel(logging.WARNING)
 
 # Auth
 class MHALAuth(Auth):
@@ -66,7 +65,7 @@ class MHALAuth(Auth):
         return wrap
 
 # App
-app = Dash(__name__, use_pages=True, serve_locally=False, title="MHAL Panel", update_title="MHAL Panel", meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,"}])
+app = Dash(__name__, use_pages=True, serve_locally=True, title="MHAL Panel", update_title="MHAL Panel", meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,"}])
 auth = MHALAuth(app)
 app._favicon = "favicon.png"
 
@@ -137,7 +136,7 @@ def get_rows2(i, y):
     return out
 
 @app.callback(
-    Output("sonuc-ogrenci-table", "children"), Output("ogrenci-net-chart", "figure"),
+    Output("sonuc-ogrenci-table", "children"), Output("ogrenci-net-chart", "figure"), Output("ogrenci-puan-chart", "figure"),
     Input("sonuc-sorgu-getir", "n_clicks"),
     State("sonuc-ogretim-yili", "value"), State("ogrenci-bilgi-isim", "children"), State("ogrenci-bilgi-sinif", "children"), State("ogrenci-bilgi-numara", "children")
 )
@@ -148,21 +147,38 @@ def sonuc_getir(n_clicks, ogr_yili, isim, sinif, numara):
 
     net_fig = {
         "data": [
-            {"x": [ud(row[0].split("(")[-1].split(")")[0].strip()) for row in rows], "y": [int(float(row[4])) for row in rows], "text": [str(int(float(row[4]))) for row in rows], "hovertext": [ud(row[0].split("-")[1].split("(")[0].strip()) for row in rows], "type": "bar", "name": "Toplam"},
-            {"x": [ud(row[0].split("(")[-1].split(")")[0].strip()) for row in rows], "y": [int(float(row[7])) for row in rows], "text": [str(int(float(row[7]))) for row in rows], "hovertext": [ud(row[0].split("-")[1].split("(")[0].strip()) for row in rows], "type": "bar", "name": "Türkçe"},
-            {"x": [ud(row[0].split("(")[-1].split(")")[0].strip()) for row in rows], "y": [int(float(row[10])) for row in rows], "text": [str(int(float(row[10]))) for row in rows], "hovertext": [ud(row[0].split("-")[1].split("(")[0].strip()) for row in rows], "type": "bar", "name": "Sosyal"},
-            {"x": [ud(row[0].split("(")[-1].split(")")[0].strip()) for row in rows], "y": [int(float(row[13])) for row in rows], "text": [str(int(float(row[13]))) for row in rows], "hovertext": [ud(row[0].split("-")[1].split("(")[0].strip()) for row in rows], "type": "bar", "name": "Matematik"},
-            {"x": [ud(row[0].split("(")[-1].split(")")[0].strip()) for row in rows], "y": [int(float(row[16])) for row in rows], "text": [str(int(float(row[16]))) for row in rows], "hovertext": [ud(row[0].split("-")[1].split("(")[0].strip()) for row in rows], "type": "bar", "name": "Fen"},
+            {"x": [ud(row[0].split("(")[-1].split(")")[0].strip()) for row in rows], "y": [float(row[4]) for row in rows], "text": [str(float(row[4])) for row in rows], "hovertext": [ud(row[0].split("-")[1].split("(")[0].strip()) for row in rows], "type": "bar", "name": "Toplam"},
+            {"x": [ud(row[0].split("(")[-1].split(")")[0].strip()) for row in rows], "y": [float(row[7]) for row in rows], "text": [str(float(row[7])) for row in rows], "hovertext": [ud(row[0].split("-")[1].split("(")[0].strip()) for row in rows], "type": "bar", "name": "Türkçe"},
+            {"x": [ud(row[0].split("(")[-1].split(")")[0].strip()) for row in rows], "y": [float(row[10]) for row in rows], "text": [str(float(row[10])) for row in rows], "hovertext": [ud(row[0].split("-")[1].split("(")[0].strip()) for row in rows], "type": "bar", "name": "Sosyal"},
+            {"x": [ud(row[0].split("(")[-1].split(")")[0].strip()) for row in rows], "y": [float(row[13]) for row in rows], "text": [str(float(row[13])) for row in rows], "hovertext": [ud(row[0].split("-")[1].split("(")[0].strip()) for row in rows], "type": "bar", "name": "Matematik"},
+            {"x": [ud(row[0].split("(")[-1].split(")")[0].strip()) for row in rows], "y": [float(row[16]) for row in rows], "text": [str(float(row[16])) for row in rows], "hovertext": [ud(row[0].split("-")[1].split("(")[0].strip()) for row in rows], "type": "bar", "name": "Fen"},
         ],
         "layout": {
             "plot_bgcolor": "#25262B",
             "paper_bgcolor": "#25262B",
             "font": {"color": "#DFDFDF"},
             "margin": dict(l=0, r=0, t=0, b=50),
-            "legend": dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
+            "legend": dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
+            "xaxis": {"fixedrange": True, "rangeslider": {"visible": True}},
+            "yaxis": {"fixedrange": True, "rangeslider": {"visible": True}},
         }
     }
-    return table, net_fig
+
+    puan_fig = {
+        "data": [
+            {"x": [ud(row[0].split("(")[-1].split(")")[0].strip()) for row in rows], "y": [round(float(row[7])*3.3 + float(row[10])*3.4 + float(row[13])*3.3 + float(row[16])*3.4 + 100, 3)  for row in rows], "text": [str(round(float(row[7])*3.3 + float(row[10])*3.4 + float(row[13])*3.3 + float(row[16])*3.4 + 100, 3))  for row in rows], "hovertext": [ud(row[0].split("-")[1].split("(")[0].strip()) for row in rows], "type": "marker", "name": "Puan"},
+        ],
+        "layout": {
+            "plot_bgcolor": "#25262B",
+            "paper_bgcolor": "#25262B",
+            "font": {"color": "#DFDFDF"},
+            "margin": dict(l=0, r=0, t=0, b=50),
+            "legend": dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
+            "xaxis": {"fixedrange": True, "rangeslider": {"visible": True}},
+            "yaxis": {"fixedrange": True, "rangeslider": {"visible": True}},
+        }
+    }
+    return table, net_fig, puan_fig
 
 if __name__ == "__main__":
-    app.run_server(debug=True, port=5000)
+    app.run_server(debug=False, port=5000)
