@@ -21,7 +21,7 @@ def layout(ogr_yili, sinav_no):
     if type(df) != type(None):
         for r in range(len(df.index)):
             row = df.loc[r, :].values.flatten().tolist()[1:]
-            table.append(html.Tr([html.Td(str(row[-4]))] + [html.Td(str(i)) for i in row] + [html.A(dmc.Button("Profil"), href=f"/ogrenci/{row[0]}_{ud(row[1].lower().replace(' ',''))}")]))
+            table.append(html.Tr([html.Td(str(row[-4]))] + [html.Td(str(i)) for i in row] + [html.A(dmc.Button("Profil"), href=f"/ogrenci/{row[0]}_{ud(row[1].lower().replace(' ',''))}")], style={"background-color": "transparent" if r%2 else "#2C2E33"}))
     
     return html.Div(children=[
         html.Div(children=[
@@ -49,7 +49,7 @@ def layout(ogr_yili, sinav_no):
                             ])
                         ),
                         html.Tbody(children=table, id="ogrenci-sinav-table"),
-                    ], highlightOnHover=True, withBorder=True, style={"zoom": "80%"})
+                    ], highlightOnHover=False, withBorder=True, style={"zoom": "80%"})
                 ], offsetScrollbars=False, style={"height": "900px"}),
             ], style={"width": "100%", "padding-left": "20px", "padding-right": "20px", "padding-bottom": "20px", "margin-bottom": "30px"}, withBorder=True)
         ], style={"width": "100%", "padding-top": "20px", "padding-left": "6%", "padding-right": "6%", "padding-bottom": "20px"})
