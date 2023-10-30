@@ -1,7 +1,7 @@
 # Module Imports
 from dash import register_page, html, dcc
 import dash_mantine_components as dmc
-from os import listdir
+from os import listdir, path
 import pandas as pd
 from unidecode import unidecode as ud
 
@@ -10,10 +10,10 @@ register_page(__name__, path="/ogrenci", path_template="ogrenci/<ogr_no>_<ogr_na
 
 def get_rows1(i):
     out = []
-    for y in listdir("database"):
-        for x in listdir(f"database\\{y}"):
+    for y in listdir(path.join("database")):
+        for x in listdir(path.join("database", y)):
             if x.endswith(".xlsx"):
-                df = pd.read_excel(f"database\\{y}\\{x}")
+                df = pd.read_excel(path.join("database", y, x))
                 r = None
                 for id, di in enumerate(df["İsim"].tolist()):
                     if ud(di.lower().replace(" ","")) == ud(i.lower().replace(" ","")): r = id
@@ -54,7 +54,7 @@ def layout(ogr_no, ogr_name):
             dmc.Card(children=[
                 html.H3("Sonuç Sorgu"),
                 html.H5("Öğretim Yılı", style={"margin-bottom": "4px"}),
-                dmc.Select(placeholder="Select", id="sonuc-ogretim-yili", value=listdir("database")[-1], data=[{"value":i, "label":i} for i in listdir("database")]),
+                dmc.Select(placeholder="Select", id="sonuc-ogretim-yili", value=listdir(path.join("database"))[-1], data=[{"value":i, "label":i} for i in listdir(path.join("database"))]),
                 html.Br(),
                 dmc.Button("Getir", id="sonuc-sorgu-getir", style={"width": "100%"}),
                 html.Br(),
