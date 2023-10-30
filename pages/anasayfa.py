@@ -35,7 +35,6 @@ def layout():
             dmc.Button("Filtrele", id="sorgu-ogrenci-filtrele", style={"width": "100%"}),
             html.Br(),
             html.Br(),
-            html.Br(),
             dmc.ScrollArea(children=[
                 dmc.Table(
                     [
