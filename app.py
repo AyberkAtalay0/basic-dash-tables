@@ -119,7 +119,9 @@ def ogrenci_filtrele(n_clicks, ograd, ogrno, ogrsn):
                             out.append(elem)
                             readies.append((numara, isim, sinif))
                             order.append(numara)
-    return [x for _, x in sorted(zip(order, out), key=lambda pair: pair[0])]
+    rows = [x for _, x in sorted(zip(order, out), key=lambda pair: pair[0])]
+    for i in range(len(rows)): rows[i].style={"background-color": "transparent" if i%2 else "#2C2E33"}
+    return rows
 
 def get_rows2(i, y):
     out = []
@@ -144,7 +146,7 @@ def get_rows2(i, y):
 def sonuc_getir(n_clicks, ogr_yili, isim, sinif, numara):
     rows = get_rows2(isim, ogr_yili)
 
-    table = [html.Tr([html.Td(str(i)) for i in row] + [html.A(dmc.Button("Tablo"), href=f"/sinav/{ogr_yili}_{str(row[0]).split(' - ')[0].strip()}")]) for row in rows]
+    table = [html.Tr([html.Td(str(i)) for i in row] + [html.A(dmc.Button("Tablo"), href=f"/sinav/{ogr_yili}_{str(row[0]).split(' - ')[0].strip()}")], style={"background-color": "transparent" if rows.index(row)%2 else "#2C2E33"}) for row in rows]
 
     net_fig = {
         "data": [
