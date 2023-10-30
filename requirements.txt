@@ -1,7 +1,7 @@
 dash
 dash_auth
 dash_mantine_components
-Flask==2.2.5
+flask
 pandas
 plotly
 tabula
