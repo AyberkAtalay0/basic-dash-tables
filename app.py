@@ -1,9 +1,9 @@
 # Module Imports
-import base64, flask, os, dash_mantine_components as dmc
+import base64, flask, dash_mantine_components as dmc
 from dash import Dash, page_container, Output, Input, State, html
 from dash_auth.auth import Auth
 from datetime import datetime
-from os import listdir
+from os import listdir, path
 import pandas as pd
 from unidecode import unidecode as ud
 
@@ -18,13 +18,13 @@ class MHALAuth(Auth):
 
     def is_authorized(self):
         out = {}
-        if os.path.exists("configuration\\users.cfg"):
-            with open("configuration\\users.cfg", "r", encoding="utf-8") as f:
+        if path.exists(path.join("configuration", "users.cfg")):
+            with open(path.join("configuration", "users.cfg"), "r", encoding="utf-8") as f:
                 for raw in f.read().removesuffix("\n").strip().split("\n"):
                     user = raw.split(";")
                     out.update({user[0]: user[1].replace("<secret1>", str(int(float(datetime.now().month*datetime.now().day+3))))})
         else:
-            with open("configuration\\users.cfg", "w") as f: f.write("")
+            with open(path.join("configuration", "users.cfg"), "w") as f: f.write("")
 
         self._users = (
             out
@@ -87,7 +87,7 @@ app.layout = dmc.MantineProvider(
     Input("sorgu-ogretim-yili", "value")
 )
 def indis_yenile(ogretim_yili):
-    return listdir("database\\"+ogretim_yili), listdir("database\\"+ogretim_yili)[-1] if len(listdir("database\\"+ogretim_yili)) > 0 else None
+    return listdir(path.join("database", str(ogretim_yili))), listdir(path.join("database", str(ogretim_yili)))[-1] if len(listdir(path.join("database", str(ogretim_yili)))) > 0 else None
 
 @app.callback(
     Output("sorgu-sinav-getir", "href"), 
@@ -105,10 +105,10 @@ def sinav_getir(indi, ogr_yili):
 )
 def ogrenci_filtrele(n_clicks, ograd, ogrno, ogrsn):
     out, readies, order = [], [], []
-    for ogry in listdir("database"):
-        for xlsx in listdir("database\\"+ogry):
+    for ogry in listdir(path.join("database")):
+        for xlsx in listdir(path.join("database", ogry)):
             if xlsx.endswith(".xlsx"):
-                table = pd.read_excel("database\\"+ogry+"\\"+xlsx)
+                table = pd.read_excel(path.join("database", ogry, xlsx))
                 for numara, isim, sinif in zip(table["Numara"], table["İsim"], table["Sınıf"]):
                     if (ud(str(ograd).replace("None","").replace(" ","").upper()) in ud(str(isim).replace(" ","").upper()) or ud(str(ograd).replace("None","").replace(" ","").upper()) == "") \
                         and (ud(str(ogrno).replace("None","").replace(" ","").upper()) in ud(str(numara).replace(" ","").upper()) or ud(str(ogrno).replace("None","").replace(" ","").upper()) == "") \
@@ -123,9 +123,9 @@ def ogrenci_filtrele(n_clicks, ograd, ogrno, ogrsn):
 
 def get_rows2(i, y):
     out = []
-    for x in listdir(f"database\\{y}"):
+    for x in listdir(path.join("database", y)):
         if x.endswith(".xlsx"):
-            df = pd.read_excel(f"database\\{y}\\{x}")
+            df = pd.read_excel(path.join("database", y, x))
             r = None
             for id, di in enumerate(df["İsim"].tolist()):
                 if ud(di.lower().replace(" ","")) == ud(i.lower().replace(" ","")): r = id
