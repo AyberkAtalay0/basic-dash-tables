@@ -8,3 +8,4 @@ tabula
 tabula_py
 Unidecode
 gunicorn
+openpyxl
