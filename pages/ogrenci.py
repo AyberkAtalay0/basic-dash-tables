@@ -49,7 +49,7 @@ def layout(ogr_no, ogr_name):
                 dmc.Table(children=[
                     html.Thead(html.Tr([html.Th("Öğrenci Adı"), html.Th("Öğrenci Sınıfı"), html.Th("Öğrenci Numarası")])),
                     html.Tbody(children=[html.Tr([html.Td(isim, id="ogrenci-bilgi-isim"), html.Td(sinif, id="ogrenci-bilgi-sinif"), html.Td(numara, id="ogrenci-bilgi-numara")])], id="ogrenci-table"),
-                ], highlightOnHover=True, withBorder=True)
+                ], highlightOnHover=False, withBorder=True)
             ], style={"width": "100%", "padding-left": "20px", "padding-right": "20px", "padding-bottom": "20px", "margin-bottom": "30px"}, withBorder=True),
             dmc.Card(children=[
                 html.H3("Sonuç Sorgu"),
@@ -57,7 +57,6 @@ def layout(ogr_no, ogr_name):
                 dmc.Select(placeholder="Select", id="sonuc-ogretim-yili", value=listdir(path.join("database"))[-1], data=[{"value":i, "label":i} for i in listdir(path.join("database"))]),
                 html.Br(),
                 dmc.Button("Getir", id="sonuc-sorgu-getir", style={"width": "100%"}),
-                html.Br(),
                 html.Br(),
                 html.Br(),
                 dmc.ScrollArea(children=[
@@ -78,14 +77,12 @@ def layout(ogr_no, ogr_name):
                             ])
                         ),
                         html.Tbody(children=[], id="sonuc-ogrenci-table"),
-                    ], highlightOnHover=True, withBorder=True, style={"zoom": "80%"})
+                    ], highlightOnHover=False, withBorder=True, style={"zoom": "80%"})
                 ], offsetScrollbars=False),
-                html.Br(),
                 html.Br(),
                 html.Br(),
                 html.H5("Ders Bazlı Netler", style={"margin-bottom": "4px"}),
                 dcc.Graph(id="ogrenci-net-chart", figure={"data": [{"x": [], "y": [], "type": "bar", "name": ""}], "layout": {"title": "Veri Yok", "plot_bgcolor": "#25262B", "paper_bgcolor": "#25262B", "font": {"color": "#DFDFDF"}, "margin": dict(l=0, r=0, t=0, b=50),}}),
-                html.Br(),
                 html.Br(),
                 html.Br(),
                 html.H5("Sınav Puanları", style={"margin-bottom": "4px"}),
