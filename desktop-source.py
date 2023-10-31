@@ -66,7 +66,7 @@ class WebBrowser(FramelessWindow):
             },
             "pressed": {
                 "color": QColor(255, 255, 255),
-                'background': "QColor(45, 50, 79)
+                'background': QColor(45, 50, 79)
             },
         }
 
