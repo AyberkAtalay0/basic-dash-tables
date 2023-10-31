@@ -57,30 +57,30 @@ class WebBrowser(FramelessWindow):
 
         windowbuttonStyle = {
             "normal": {
-                "color": hex2rgb("#C0C0C0"),
-                'background': hex2rgb("#10141f")
+                "color": "rgb(192, 192, 192)",
+                'background': "rgb(16, 20, 31)"
             },
             "hover": {
-                "color": hex2rgb("#FFFFFF"),
-                'background': hex2rgb("#2D324F")
+                "color": "rgb(255, 255, 255)",
+                'background': "rgb(45, 50, 79)"
             },
             "pressed": {
-                "color": hex2rgb("#FFFFFF"),
-                'background': hex2rgb("#2D324F")
+                "color": "rgb(255, 255, 255)",
+                'background': "rgb(45, 50, 79)"
             },
         }
 
         closebuttonStyle = {
             "normal": {
-                "background": hex2rgb("#10141f"),
+                "background": "rgb(16, 20, 31)",
                 "icon": ":/framelesswindow/close_white.svg"
             },
             "hover": {
-                "background": hex2rgb("#FF0000"),
+                "background": "rgb(255, 0, 0)",
                 "icon": ":/framelesswindow/close_white.svg"
             },
             "pressed": {
-                "background": hex2rgb("#FF0000"),
+                "background": "rgb(255, 0, 0)",
                 "icon": ":/framelesswindow/close_white.svg"
             },
         }
