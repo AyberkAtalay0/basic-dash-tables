@@ -28,7 +28,7 @@ from PyQt6.QtWebEngineWidgets import *
 class WorkerThread(QThread):
     def run(self):
         with open(path.join("app.py"), "r", encoding="utf-8") as afr:
-        exec(afr.read())
+            exec(afr.read())
 
 class WebBrowser(QMainWindow):
     def __init__(self):
