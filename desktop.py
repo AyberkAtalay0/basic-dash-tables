@@ -48,7 +48,7 @@ class WebBrowser(QMainWindow):
         self.timer.start(3000)
 
     def refresh_page(self):
-        self.browser.setUrl(QUrl("http://127.0.0.1:8547/"))
+        self.browser.setUrl(QUrl("https://mhal-panel.onrender.com/"))
         self.timer.start(3000)
 
 if __name__ == "__main__":
