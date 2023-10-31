@@ -26,7 +26,9 @@ def update_files():
     for n in nfiles:
         print(n, n in xfiles)
 
-    return nfiles, files
+    print(xfiles)
+
+    return nfiles, xfiles
 
 import sys
 from PyQt6.QtCore import *
