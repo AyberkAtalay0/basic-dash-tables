@@ -1,5 +1,5 @@
 import requests, subprocess
-from os import listdir, path
+from os import listdir, path, walk
 
 def update_files():
     branch_url = "https://github.com/AyberkAtalay0/basic-dash-tables/blob/main"
