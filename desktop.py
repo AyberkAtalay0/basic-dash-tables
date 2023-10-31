@@ -21,7 +21,6 @@ def update_files():
     return files
 
 import sys
-sys.argv.append("--disable-web-security")
 from PyQt6.QtCore import *
 from PyQt6.QtWidgets import *
 from PyQt6.QtWebEngineWidgets import *
@@ -43,14 +42,14 @@ class WebBrowser(QMainWindow):
         self.worker_thread = WorkerThread()
         self.worker_thread.start()
 
-        self.timer = QTimer(self)
-        self.timer.timeout.connect(self.refresh_page)
-        self.timer.start(3000)
-
-    def refresh_page(self):
-        self.browser.setUrl(QUrl("https://mhal-panel.onrender.com/"))
-        print("RD")
-        self.timer.start(3000)
+        #     self.timer = QTimer(self)
+        #     self.timer.timeout.connect(self.refresh_page)
+        #     self.timer.start(3000)
+    
+        # def refresh_page(self):
+        #     self.browser.setUrl(QUrl("https://mhal-panel.onrender.com/"))
+        #     print("RD")
+        #     self.timer.start(3000)
 
 if __name__ == "__main__":
     qtapp = QApplication(sys.argv)
