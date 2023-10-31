@@ -48,7 +48,7 @@ class ExtraThread(QThread):
         # with open(path.join("app.py"), "r", encoding="utf-8") as afr:
         #     exec(afr.read())
 
-class WebBrowser(FramelessMainWindow):
+class WebBrowser(FramelessWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("MHAL Deneme Panel")
