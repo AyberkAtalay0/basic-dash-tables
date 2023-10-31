@@ -23,7 +23,7 @@ def update_files():
     return files
 
 def web_thread():
-    exec(path.join("app.py"))
+    exec(path.join('app.py'))
 
 import sys
 from PyQt6.QtCore import *
