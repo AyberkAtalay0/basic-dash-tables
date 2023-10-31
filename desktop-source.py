@@ -53,9 +53,6 @@ class WebBrowser(FramelessWindow):
         super().__init__()
         self.setWindowTitle("MHAL Deneme Panel")
         # self.setWindowIcon('./Stark-icon.png')
-        titleBar = self.getTitleBar()
-        titleBar.setTitleBarFont(QFont("Montserrat", 10))
-        titleBar.setFixedHeight(40)
         self.setStyleSheet("background-color: #1A1B1E; color: silver;")
 
         self.browser = QWebEngineView()
