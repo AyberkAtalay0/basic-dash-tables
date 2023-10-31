@@ -40,7 +40,7 @@ if __name__ == "__main__":
     web_thread()
     
     qtapp = QApplication(sys.argv)
-    QCoreApplication.setApplicationName("MHAL TYT Panel")
+    QCoreApplication.setApplicationName("MHAL Deneme Panel")
     window = WebBrowser()
     window.show()
     qtapp.exec()
