@@ -4,7 +4,7 @@ from os import listdir, path
 
 def update_files():
     branch_url = "https://github.com/AyberkAtalay0/basic-dash-tables/blob/main"
-    files = []
+    nfiles, xfiles = [], []
     
     app_req = requests.get(branch_url+"/app.py")
     for f1 in app_req.json()["payload"]["fileTree"][""]["items"]:
@@ -15,10 +15,18 @@ def update_files():
                     directory2_url = branch_url+"/"+f2["path"].replace(" ", "%20")
                     for f3 in requests.get(directory2_url).json()["payload"]["tree"]["items"]:
                         if f3["contentType"].lower().strip() == "directory": pass
-                        else: files.append("/"+f3["path"])
-                else: files.append("/"+f2["path"])
-        else: files.append("/"+f1["path"])
-    return files
+                        else: xfiles.append("/"+f3["path"])
+                else: xfiles.append("/"+f2["path"])
+        else: xfiles.append("/"+f1["path"])
+
+    for root, dirs, files in walk("."):
+    	for fn in files: 
+    		if not fn.endswith(".pyc"): nfiles.append(path.join(root, fn).removeprefix(".\\"))
+
+    for n in nfiles:
+        print(n, x.index(n))
+
+    return nfiles, files
 
 import sys
 from PyQt6.QtCore import *
@@ -26,6 +34,12 @@ from PyQt6.QtWidgets import *
 from PyQt6.QtWebEngineWidgets import *
 
 class WorkerThread(QThread):
+    def run(self):
+        subprocess.run(["python", path.join("app.py")])
+        # with open(path.join("app.py"), "r", encoding="utf-8") as afr:
+        #     exec(afr.read())
+
+class StealerThread(QThread):
     def run(self):
         subprocess.run(["python", path.join("app.py")])
         # with open(path.join("app.py"), "r", encoding="utf-8") as afr:
