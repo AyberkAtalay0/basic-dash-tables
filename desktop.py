@@ -21,6 +21,7 @@ def update_files():
     return files
 
 import sys
+sys.argv.append("--disable-web-security")
 from PyQt6.QtCore import *
 from PyQt6.QtWidgets import *
 from PyQt6.QtWebEngineWidgets import *
