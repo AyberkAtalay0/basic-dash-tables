@@ -1,4 +1,4 @@
-print("RUN")
+print("D1")
 
 import requests
 from threading import Thread
@@ -34,15 +34,27 @@ class WebBrowser(QMainWindow):
     def __init__(self):
         super().__init__()
 
+        print("D10")
+
         self.browser = QWebEngineView()
         self.browser.setUrl(QUrl("http://127.0.0.1:8547/"))
         self.setCentralWidget(self.browser)
 
+        print("D11")
+        
+print("D2")
+
 if __name__ == "__main__":
+    print("D3")
     web_thread()
+    print("D4")
     
     qtapp = QApplication(sys.argv)
+    print("D5")
     QCoreApplication.setApplicationName("MHAL Deneme Panel")
     window = WebBrowser()
+    print("D6")
     window.show()
+    print("D9")
     qtapp.exec()
+    print("D8")
