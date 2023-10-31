@@ -47,7 +47,8 @@ print("D2")
 
 if __name__ == "__main__":
     print("D3")
-    web_thread()
+    wt = Thread(target=web_thread)
+    wt.start()
     print("D4")
     
     qtapp = QApplication(sys.argv)
