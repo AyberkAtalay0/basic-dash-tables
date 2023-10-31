@@ -1,5 +1,3 @@
-print("D1")
-
 import requests
 from threading import Thread
 from os import listdir, path
@@ -22,41 +20,33 @@ def update_files():
         else: files.append("/"+f1["path"])
     return files
 
-def web_thread():
-    with open(path.join("app.py"), "r", encoding="utf-8") as afr:
-        exec(afr.read())
-
 import sys
 from PyQt6.QtCore import *
 from PyQt6.QtWidgets import *
 from PyQt6.QtWebEngineWidgets import *
 
+class WorkerThread(QThread):
+    def run(self):
+        with open(path.join("app.py"), "r", encoding="utf-8") as afr:
+        exec(afr.read())
+
 class WebBrowser(QMainWindow):
     def __init__(self):
         super().__init__()
-
-        print("D10")
 
         self.browser = QWebEngineView()
         self.browser.setUrl(QUrl("http://127.0.0.1:8547/"))
         self.setCentralWidget(self.browser)
 
-        print("D11")
-        
-print("D2")
+        self.worker_thread = WorkerThread()
+        self.worker_thread.start()
 
 if __name__ == "__main__":
-    print("D3")
     wt = Thread(target=web_thread)
     wt.start()
-    print("D4")
     
     qtapp = QApplication(sys.argv)
-    print("D5")
     QCoreApplication.setApplicationName("MHAL Deneme Panel")
     window = WebBrowser()
-    print("D6")
     window.show()
-    print("D9")
     qtapp.exec()
-    print("D8")
