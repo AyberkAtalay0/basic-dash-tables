@@ -37,8 +37,7 @@ class WebBrowser(QMainWindow):
         self.setCentralWidget(self.browser)
 
 if __name__ == "__main__":
-    wt = Thread(target=web_thread)
-    wt.start()
+    web_thread()
     
     app = QApplication(sys.argv)
     QCoreApplication.setApplicationName("Web Tarayıcı")
