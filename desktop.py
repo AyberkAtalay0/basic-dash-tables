@@ -1,4 +1,6 @@
 import requests
+from threading import Thread
+from os import listdir, path
 
 def update_files():
     branch_url = "https://github.com/AyberkAtalay0/basic-dash-tables/blob/main"
@@ -18,6 +20,9 @@ def update_files():
         else: files.append("/"+f1["path"])
     return files
 
+def web_thread():
+    exec(path.join("app.py"))
+
 import sys
 from PyQt6.QtCore import *
 from PyQt6.QtWidgets import *
@@ -28,10 +33,13 @@ class WebBrowser(QMainWindow):
         super().__init__()
 
         self.browser = QWebEngineView()
-        self.browser.setUrl(QUrl("https://www.google.com"))
+        self.browser.setUrl(QUrl("http://127.0.0.1:8547/"))
         self.setCentralWidget(self.browser)
 
 if __name__ == "__main__":
+    wt = Thread(target=web_thread, args=(,))
+    wt.start()
+    
     app = QApplication(sys.argv)
     QCoreApplication.setApplicationName("Web Tarayıcı")
     window = WebBrowser()
