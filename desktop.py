@@ -62,10 +62,9 @@ class WebBrowser(QMainWindow):
         #     self.timer.timeout.connect(self.refresh_page)
         #     self.timer.start(3000)
     
-        # def refresh_page(self):
-        #     self.browser.setUrl(QUrl("https://mhal-panel.onrender.com/"))
-        #     print("RD")
-        #     self.timer.start(3000)
+        def refresh_page(self):
+            self.browser.setUrl(QUrl("https://mhal-panel.onrender.com/"))
+            self.timer.start(1000)
 
 if __name__ == "__main__":
     update_files()
