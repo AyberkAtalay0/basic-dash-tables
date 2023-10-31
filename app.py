@@ -7,6 +7,8 @@ from os import listdir, path
 import pandas as pd
 from unidecode import unidecode as ud
 
+print("W1")
+
 # Logs
 # log = logging.getLogger("werkzeug")
 # log.setLevel(logging.WARNING)
@@ -64,15 +66,16 @@ class MHALAuth(Auth):
                 return self.login_request()
         return wrap
 
+print("W2")
 # App
 app = Dash(__name__, use_pages=True, title="MHAL Panel", update_title="MHAL Panel", pages_folder=path.join(path.dirname(__name__), "pages"), meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,"}])
-print("A")
+print("W3")
 server = app.server
-print("B")
+print("W4")
 auth = MHALAuth(app)
-print("C")
+print("W5")
 app._favicon = "favicon.png"
-print("D")
+print("W6")
 
 app.layout = dmc.MantineProvider(
     children=[
