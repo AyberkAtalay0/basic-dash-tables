@@ -23,7 +23,7 @@ def update_files():
     return files
 
 def web_thread():
-    print("AAA")
+    print("AAA", listdir())
     exec(path.join('app.py'))
 
 import sys
