@@ -65,7 +65,7 @@ class MHALAuth(Auth):
         return wrap
 
 # App
-app = Dash(__name__, use_pages=True, serve_locally=True, title="MHAL Panel", update_title="MHAL Panel", meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,"}])
+app = Dash(__name__, use_pages=True, title="MHAL Panel", update_title="MHAL Panel", pages_folder=path.join(path.dirname(__name__), "pages"), meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,"}])
 server = app.server
 auth = MHALAuth(app)
 app._favicon = "favicon.png"
