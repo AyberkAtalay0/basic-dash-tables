@@ -184,4 +184,4 @@ def sonuc_getir(n_clicks, ogr_yili, isim, sinif, numara):
     return table, net_fig, puan_fig
 
 if __name__ == "__main__":
-    app.run_server(debug=False, port=5000)
+    app.run_server(debug=False, port=8547)
