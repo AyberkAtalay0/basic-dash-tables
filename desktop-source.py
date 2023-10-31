@@ -56,15 +56,7 @@ class WebBrowser(FramelessWindow):
         self.setStyleSheet("background-color: #1A1B1E; color: silver;")
 
         self.browser = QWebEngineView()
-        # self.browser.setScrollBarPolicy(Qt.Vertical, Qt.ScrollBarAlwaysOff)
-        # self.browser.setScrollBarPolicy(Qt.Horizontal, Qt.ScrollBarAlwaysOff)
         self.browser.setUrl(QUrl("http://127.0.0.1:8547/"))
-
-        mainWidget = self.centralWidget()
-        lay = mainWidget.layout()
-        lay.addWidget(self.browser)
-        mainWidget.setLayout(lay)
-        self.setCentralWidget(mainWidget)
 
         self.worker_thread = WorkerThread()
         self.worker_thread.start()
