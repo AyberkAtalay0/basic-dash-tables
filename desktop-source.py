@@ -32,7 +32,7 @@ def update_files():
 import sys
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
-from PyQt5.QtGui import QFont
+from PyQt5.QtGui import QFont, QColor
 from PyQt5.QtWebEngineWidgets import *
 from qframelesswindow import FramelessWindow
 
@@ -57,30 +57,30 @@ class WebBrowser(FramelessWindow):
 
         windowbuttonStyle = {
             "normal": {
-                "color": "rgb(192, 192, 192)",
-                'background': "rgb(16, 20, 31)"
+                "color": QColor(192, 192, 192),
+                'background': QColor(16, 20, 31)
             },
             "hover": {
-                "color": "rgb(255, 255, 255)",
-                'background': "rgb(45, 50, 79)"
+                "color": QColor(255, 255, 255),
+                'background': QColor(45, 50, 79)
             },
             "pressed": {
-                "color": "rgb(255, 255, 255)",
-                'background': "rgb(45, 50, 79)"
+                "color": QColor(255, 255, 255),
+                'background': "QColor(45, 50, 79)
             },
         }
 
         closebuttonStyle = {
             "normal": {
-                "background": "rgb(16, 20, 31)",
+                "background": QColor(16, 20, 31),
                 "icon": ":/framelesswindow/close_white.svg"
             },
             "hover": {
-                "background": "rgb(255, 0, 0)",
+                "background": QColor(255, 0, 0),
                 "icon": ":/framelesswindow/close_white.svg"
             },
             "pressed": {
-                "background": "rgb(255, 0, 0)",
+                "background": QColor(255, 0, 0),
                 "icon": ":/framelesswindow/close_white.svg"
             },
         }
