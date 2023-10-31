@@ -27,7 +27,7 @@ from PyQt6.QtWebEngineWidgets import *
 
 class WorkerThread(QThread):
     def run(self):
-        subprocess.run(["python", path.join("app.py")])
+        pass
         # with open(path.join("app.py"), "r", encoding="utf-8") as afr:
         #     exec(afr.read())
 
@@ -43,6 +43,8 @@ class WebBrowser(QMainWindow):
         self.worker_thread.start()
 
 if __name__ == "__main__":
+    subprocess.run(["python", path.join("app.py")])
+    
     qtapp = QApplication(sys.argv)
     QCoreApplication.setApplicationName("MHAL Deneme Panel")
     window = WebBrowser()
