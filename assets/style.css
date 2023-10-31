@@ -1,9 +1,15 @@
+body {
+    background-color: #1A1B1E;
+    overflow-y: hidden;
+}
+
 ._dash-loading {
     margin: auto;
     color: transparent;
     width: 0;
     height: 0;
     text-align: center;
+    background-color: #1A1B1E;
 }
 
 ._dash-loading::after {
@@ -19,8 +25,13 @@
     -webkit-animation: spinner-border 0.75s linear infinite;
     animation: spinner-border 0.75s linear infinite;
     margin-top: 2rem;
+    background-color: #1A1B1E;
 }
 
 .modebar{
     display: none !important;
+}
+
+button {
+    background-color: #1e9bff;
 }
