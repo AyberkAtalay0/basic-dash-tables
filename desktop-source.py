@@ -31,9 +31,9 @@ def update_files():
     return nfiles, xfiles
 
 import sys
-from PyQt6.QtCore import *
-from PyQt6.QtWidgets import *
-from PyQt6.QtWebEngineWidgets import *
+from PyQt5.QtCore import *
+from PyQt5.QtWidgets import *
+from PyQt5.QtWebEngineWidgets import *
 
 class WorkerThread(QThread):
     def run(self):
