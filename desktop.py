@@ -24,7 +24,7 @@ def update_files():
 
 def web_thread():
     print("AAA", listdir())
-    exec(path.join('app.py'))
+    exec(path.join('abc'))
 
 import sys
 from PyQt6.QtCore import *
