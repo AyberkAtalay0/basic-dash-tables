@@ -12,4 +12,4 @@ openpyxl
 PyQt5
 PyQt5-WebEngine
 requests
-pyqt_frameless_window
+PyQt5-Frameless-Window
