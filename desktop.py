@@ -27,72 +27,9 @@ class WebBrowser(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        # Web tarayıcı penceresi oluştur
         self.browser = QWebEngineView()
         self.browser.setUrl(QUrl("https://www.google.com"))
-        self.browser.page().profile().downloadRequested.connect(self.downloadRequested)
         self.setCentralWidget(self.browser)
-
-        # Menü çubuğunu ayarla
-        navbar = QToolBar()
-        self.addToolBar(navbar)
-
-        # Geri düğmesi
-        back_btn = QAction("Geri", self)
-        back_btn.setStatusTip("Geri")
-        back_btn.triggered.connect(self.browser.back)
-        navbar.addAction(back_btn)
-
-        # İleri düğmesi
-        forward_btn = QAction("İleri", self)
-        forward_btn.setStatusTip("İleri")
-        forward_btn.triggered.connect(self.browser.forward)
-        navbar.addAction(forward_btn)
-
-        # Yenile düğmesi
-        reload_btn = QAction("Yenile", self)
-        reload_btn.setStatusTip("Yenile")
-        reload_btn.triggered.connect(self.browser.reload)
-        navbar.addAction(reload_btn)
-
-        # Ana sayfa düğmesi
-        home_btn = QAction("Ana Sayfa", self)
-        home_btn.setStatusTip("Ana Sayfa")
-        home_btn.triggered.connect(self.navigate_home)
-        navbar.addAction(home_btn)
-
-        # URL çubuğu
-        self.url_bar = QLineEdit()
-        self.url_bar.returnPressed.connect(self.navigate_to_url)
-        navbar.addWidget(self.url_bar)
-
-        # Arama düğmesi
-        search_btn = QAction("Ara", self)
-        search_btn.setStatusTip("Ara")
-        search_btn.triggered.connect(self.navigate_to_url)
-        navbar.addAction(search_btn)
-
-        # Sayfa yüklenirken URL'yi güncelle
-        self.browser.urlChanged.connect(self.update_urlbar)
-
-    def navigate_home(self):
-        self.browser.setUrl(QUrl("https://www.google.com"))
-
-    def navigate_to_url(self):
-        q = QUrl(self.url_bar.text())
-        if q.scheme() == "":
-            q.setScheme("http")
-
-        self.browser.setUrl(q)
-
-    def update_urlbar(self, q):
-        self.url_bar.setText(q.toString())
-        self.url_bar.setCursorPosition(0)
-
-    def downloadRequested(self, downloadItem):
-        # İndirme isteğini kabul etmek veya reddetmek için kullanabilirsiniz
-        # downloadItem.accept()
-        pass
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
