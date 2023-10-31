@@ -24,7 +24,7 @@ def update_files():
     		if not fn.endswith(".pyc"): nfiles.append(path.join(root, fn).removeprefix(".\\"))
 
     for n in nfiles:
-        print(n, xfiles.index(n))
+        print(n, n in xlifes)
 
     return nfiles, files
 
