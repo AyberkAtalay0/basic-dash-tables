@@ -34,7 +34,7 @@ import sys
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtWebEngineWidgets import *
-from pyqt_frameless_window import FramelessMainWindow
+from pyqt_frameless_window import FramelessDialog
 
 class WorkerThread(QThread):
     def run(self):
