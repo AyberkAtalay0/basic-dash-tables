@@ -1,3 +1,5 @@
+print("RUN")
+
 import requests
 from threading import Thread
 from os import listdir, path
