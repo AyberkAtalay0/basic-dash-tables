@@ -9,3 +9,6 @@ tabula_py
 Unidecode
 gunicorn
 openpyxl
+PyQt6
+PyQt6-WebEngine
+requests
