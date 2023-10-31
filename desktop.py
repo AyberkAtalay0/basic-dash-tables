@@ -59,8 +59,11 @@ class WebBrowser(QMainWindow):
         self.worker_thread.start()
 
         self.timer = QTimer(self)
-        self.timer.timeout.connect(lambda _: self.browser.setUrl(QUrl("http://127.0.0.1:8547/")))
+        self.timer.timeout.connect(self.refresh_page)
         self.timer.singleShot(1000)
+
+    def refresh_page(self):
+        self.browser.setUrl(QUrl("http://127.0.0.1:8547/"))
 
 if __name__ == "__main__":
     update_files()
