@@ -1,5 +1,4 @@
 import requests, subprocess
-from threading import Thread
 from os import listdir, path
 
 def update_files():
