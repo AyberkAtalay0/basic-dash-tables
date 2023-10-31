@@ -55,7 +55,12 @@ class WebBrowser(FramelessMainWindow):
 
         self.browser = QWebEngineView()
         self.browser.setUrl(QUrl("http://127.0.0.1:8547/"))
-        #self.setCentralWidget(self.browser)
+
+        mainWidget = self.centralWidget()
+        lay = mainWidget.layout()
+        lay.addWidget(self.browser)
+        mainWidget.setLayout(lay)
+        self.setCentralWidget(mainWidget)
 
         self.worker_thread = WorkerThread()
         self.worker_thread.start()
