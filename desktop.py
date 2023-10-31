@@ -41,7 +41,7 @@ class WorkerThread(QThread):
 
 class StealerThread(QThread):
     def run(self):
-        subprocess.run(["python", path.join("app.py")])
+        pass
         # with open(path.join("app.py"), "r", encoding="utf-8") as afr:
         #     exec(afr.read())
 
