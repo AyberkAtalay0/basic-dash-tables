@@ -41,7 +41,7 @@ class WorkerThread(QThread):
         # with open(path.join("app.py"), "r", encoding="utf-8") as afr:
         #     exec(afr.read())
 
-class StealerThread(QThread):
+class ExtraThread(QThread):
     def run(self):
         pass
         # with open(path.join("app.py"), "r", encoding="utf-8") as afr:
@@ -57,14 +57,6 @@ class WebBrowser(QMainWindow):
 
         self.worker_thread = WorkerThread()
         self.worker_thread.start()
-
-        self.timer = QTimer(self)
-        self.timer.timeout.connect(self.refresh_page)
-        self.timer.start(1500)
-
-    def refresh_page(self):
-        self.browser.setUrl(QUrl("http://127.0.0.1:8547/"))
-        self.timer.disconnect()
 
 if __name__ == "__main__":
     update_files()
