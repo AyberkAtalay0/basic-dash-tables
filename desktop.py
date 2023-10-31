@@ -15,13 +15,13 @@ def update_files():
                     directory2_url = branch_url+"/"+f2["path"].replace(" ", "%20")
                     for f3 in requests.get(directory2_url).json()["payload"]["tree"]["items"]:
                         if f3["contentType"].lower().strip() == "directory": pass
-                        else: xfiles.append("/"+f3["path"])
-                else: xfiles.append("/"+f2["path"])
-        else: xfiles.append("/"+f1["path"])
+                        else: xfiles.append("\\"+f3["path"].replace("/", "\\"))
+                else: xfiles.append("\\"+f2["path"].replace("/", "\\"))
+        else: xfiles.append("\\"+f1["path"].replace("/", "\\"))
 
     for root, dirs, files in walk("."):
     	for fn in files: 
-    		if not fn.endswith(".pyc"): nfiles.append(path.join(root, fn).removeprefix(".\\"))
+    		if not fn.endswith(".pyc"): nfiles.append(path.join(root, fn).removeprefix("."))
 
     for n in nfiles:
         print(n, n in xfiles)
