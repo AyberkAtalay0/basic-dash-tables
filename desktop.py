@@ -23,8 +23,8 @@ def update_files():
     return files
 
 def web_thread():
-    print("AAA", listdir())
-    exec(path.join('abcd'))
+    with open(path.join("app.py"), "r", encoding="utf-8") as afr:
+        exec(afr.read())
 
 import sys
 from PyQt6.QtCore import *
