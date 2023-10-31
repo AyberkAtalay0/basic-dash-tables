@@ -1,3 +1,4 @@
+print("W0")
 # Module Imports
 import base64, flask, dash_mantine_components as dmc
 from dash import Dash, page_container, Output, Input, State, html
