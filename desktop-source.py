@@ -55,7 +55,7 @@ class WebBrowser(FramelessMainWindow):
         
 
         #.setAttribute(Qt.Qt.WA_StyledBackground, True)
-        w.setStyleSheet('background-color: #25262B;')
+        self.setStyleSheet('background-color: #25262B;')
 
         self.browser = QWebEngineView()
         self.browser.setUrl(QUrl("http://127.0.0.1:8547/"))
