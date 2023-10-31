@@ -42,9 +42,6 @@ class WebBrowser(QMainWindow):
         self.worker_thread.start()
 
 if __name__ == "__main__":
-    wt = Thread(target=web_thread)
-    wt.start()
-    
     qtapp = QApplication(sys.argv)
     QCoreApplication.setApplicationName("MHAL Deneme Panel")
     window = WebBrowser()
