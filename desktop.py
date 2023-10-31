@@ -66,6 +66,8 @@ class WebBrowser(QMainWindow):
         #     self.timer.start(3000)
 
 if __name__ == "__main__":
+    update_files()
+    
     qtapp = QApplication(sys.argv)
     QCoreApplication.setApplicationName("MHAL Deneme Panel")
     window = WebBrowser()
