@@ -39,8 +39,8 @@ class WebBrowser(QMainWindow):
 if __name__ == "__main__":
     web_thread()
     
-    app = QApplication(sys.argv)
-    QCoreApplication.setApplicationName("Web Tarayıcı")
+    qtapp = QApplication(sys.argv)
+    QCoreApplication.setApplicationName("MHAL TYT Panel")
     window = WebBrowser()
     window.show()
-    app.exec()
+    qtapp.exec()
