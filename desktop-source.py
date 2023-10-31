@@ -50,7 +50,8 @@ class ExtraThread(QThread):
 class WebBrowser(FramelessMainWindow):
     def __init__(self):
         super().__init__()
-        self.title = "MHAL Deneme Panel"
+        self.setWindowTitle("MHAL Deneme Panel")
+        # self.setWindowIcon('./Stark-icon.png')
 
         self.browser = QWebEngineView()
         self.browser.setUrl(QUrl("http://127.0.0.1:8547/"))
