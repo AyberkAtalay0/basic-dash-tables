@@ -50,6 +50,7 @@ class ExtraThread(QThread):
 class WebBrowser(QMainWindow):
     def __init__(self):
         super().__init__()
+        self.title = "MHAL Deneme Panel"
 
         self.browser = QWebEngineView()
         self.browser.setUrl(QUrl("http://127.0.0.1:8547/"))
@@ -62,7 +63,6 @@ if __name__ == "__main__":
     update_files()
     
     qtapp = QApplication(sys.argv)
-    QCoreApplication.setApplicationName("MHAL Deneme Panel")
     window = WebBrowser()
     window.show()
     qtapp.exec()
