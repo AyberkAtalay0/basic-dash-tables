@@ -33,7 +33,7 @@ import sys
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtWebEngineWidgets import *
-from pyqt_frameless_window import FramelessDialog
+from pyqt_frameless_window import FramelessMainWindow
 
 class WorkerThread(QThread):
     def run(self):
@@ -47,7 +47,7 @@ class ExtraThread(QThread):
         # with open(path.join("app.py"), "r", encoding="utf-8") as afr:
         #     exec(afr.read())
 
-class WebBrowser(FramelessDialog):
+class WebBrowser(FramelessMainWindow):
     def __init__(self):
         super().__init__()
         self.title = "MHAL Deneme Panel"
