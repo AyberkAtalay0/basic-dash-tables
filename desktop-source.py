@@ -86,6 +86,7 @@ class WebBrowser(FramelessWindow):
         self.browser = QWebEngineView()
         self.browser.setUrl(QUrl("http://127.0.0.1:8547/"))
 
+        self.hBoxLayout = QHBoxLayout(self)
         self.hBoxLayout.setContentsMargins(0, self.titleBar.height(), 0, 0)
         self.hBoxLayout.addWidget(self.browser)
 
