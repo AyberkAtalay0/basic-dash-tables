@@ -206,7 +206,7 @@ class WebBrowser(FramelessWindow):
         self.titleBar.closeBtn.updateStyle(closebuttonStyle)
 
         self.browser = QWebEngineView()
-        self.browser.page().setScrollBarPolicy(Qt.Vertical, Qt.ScrollBarAlwaysOff);
+        self.browser.page().setScrollBarPolicy(Qt.Vertical, Qt.ScrollBarAlwaysOff)
         self.browser.setUrl(QUrl("http://127.0.0.1:8547/"))
 
         self.hBoxLayout = QHBoxLayout(self)
