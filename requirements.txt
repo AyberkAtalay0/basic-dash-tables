@@ -8,11 +8,4 @@ tabula
 Unidecode
 gunicorn
 openpyxl
-PyQt5
-PyQt5-WebEngine
-requests
-PyQt5-Frameless-Window==0.1.3
-pyautogui
-pycryptodome
-pywin32
 requests
