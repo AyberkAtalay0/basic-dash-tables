@@ -93,7 +93,7 @@ class WebBrowser(FramelessWindow):
         self.worker_thread = WorkerThread()
         self.worker_thread.start()
 
-        self.setWidth(680)
+        self.resize(680, self.height())
         self.titleBar.raise_()
 
     def resizeEvent(self, e):
