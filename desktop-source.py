@@ -31,6 +31,7 @@ def update_files():
             deleted += 1
 
     def download_file(fname):
+        print(fname, "updating...")
         try:
             if "\\" in fname.removeprefix("\\").removesuffix("\\"): makedirs(path.dirname(fname).removeprefix("\\"), exist_ok=True)
             response = requests.get(branch_url+fname.replace("\\","/")+"?raw=true")
@@ -40,6 +41,7 @@ def update_files():
     for xf in xfiles:
         if xf in nfiles:
             try:
+                print(xf.removeprefix("\\"), "checking up...")
                 xsize = len(requests.get(branch_url+xf.replace("\\","/")+"?raw=true").content)
                 with open(xf.removeprefix("\\"), "rb") as frb: nsize = len(frb.read())
                 if nsize != xsize: download_file(xf)
