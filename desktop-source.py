@@ -32,8 +32,8 @@ def update_files():
 
     def download_file(fname):
         try:
-            response = requests.get(branch_url+fname.replace("\\","/")+"?raw=true")
             makedirs(path.dirname(fname), exist_ok=True)
+            response = requests.get(branch_url+fname.replace("\\","/")+"?raw=true")
             with open(fname.removeprefix("\\"), "wb") as file: file.write(response.content)
         except Exception as e: print(e)
 
