@@ -197,7 +197,8 @@ class WebBrowser(FramelessWindow):
         self.browser.resize(self.width(), self.height()-40)
 
     def closeEvent(self, event):
-        print("ENDING")
+        self.worker_thread.terminate()
+        self.extra_thread.terminate()
 
 if __name__ == "__main__":
     update_files()
