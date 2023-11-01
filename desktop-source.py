@@ -241,5 +241,6 @@ if __name__ == "__main__":
     
     qtapp = QApplication(sys.argv)
     window = WebBrowser()
+    window.setMinimumSize(QSize(460, 460))
     window.show()
     sys.exit(qtapp.exec())
