@@ -90,7 +90,7 @@ class WebBrowser(FramelessWindow):
         self.grid.setContentsMargins(0, 0, 0, 0)
         self.grid.setSpacing(0)
         self.setLayout(self.grid)
-        self.grid.addWidget(self.browser, 1, 0)
+        self.grid.addWidget(self.browser, 0, 1)
 
         self.worker_thread = WorkerThread()
         self.worker_thread.start()
