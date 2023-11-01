@@ -1,5 +1,5 @@
 import requests, subprocess
-from os import listdir, path, walk
+from os import listdir, path, walk, makedirs
 
 def update_files():
     blocked_words = ["desktop-source.py", "desktop-executable.py", "requirements"]
@@ -31,15 +31,16 @@ def update_files():
             deleted += 1
 
     def download_file(fname):
-        response = requests.get(branch_url+fname.replace("\\","/")+"?raw=true")
-        if response.status_code == 200:
+        try:
+            response = requests.get(branch_url+fname.replace("\\","/")+"?raw=true")
+            makedirs(os.path.dirname(fname), exist_ok=True)
             with open(fname.removeprefix("\\"), "wb") as file: file.write(response.content)
+        except: pass
 
     for xf in xfiles:
         if xf in nfiles:
-            xinfo = requests.get(branch_url+xf.replace("\\","/")).json()["payload"]["blob"]["headerInfo"]
-            xsize = round(float(xinfo["blobSize"].split()[0])/(1 if xinfo["blobSize"].endswith("KB") else 1024), 2)
-            nsize = round(path.getsize(xf.removeprefix("\\"))/1024, 2)
+            xsize = len(requests.get(branch_url+xf.replace("\\","/")+"?raw=true").content)
+            with open(xf, "rb") as frb: nsize = len(frb.read())
             print(xf, xsize, nsize)
             if nsize != xsize: download_file(xf)
         else: download_file(xf)
