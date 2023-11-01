@@ -52,6 +52,7 @@ class WebBrowser(FramelessWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("MHAL Deneme Panel")
+        self.titleBar.raise_()
         # self.setWindowIcon('./Stark-icon.png')
         self.setStyleSheet("background-color: #1A1B1E; color: silver;")
 
@@ -86,10 +87,13 @@ class WebBrowser(FramelessWindow):
         self.browser = QWebEngineView()
         self.browser.setUrl(QUrl("http://127.0.0.1:8547/"))
 
-        self.layout().addWidget(self.browser, 0, 1)
-
         self.worker_thread = WorkerThread()
         self.worker_thread.start()
+
+    def resizeEvent(self, e):
+        super().resizeEvent(e)
+        length = min(self.width(), self.height())
+        self.browser.resize(self.width(), self.height()-40)
 
 if __name__ == "__main__":
     update_files()
