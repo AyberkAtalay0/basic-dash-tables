@@ -42,7 +42,7 @@ def update_files():
             if nsize != xsize: 
                 download_file(xf)
         else:
-            # download_file(xf)
+            download_file(xf)
             # rr = requests.get(branch_url+xf.replace("\\","/")).json()["payload"]["blob"]
             # # for a in rr.keys():
             # #     print(a)
