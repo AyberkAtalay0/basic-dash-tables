@@ -37,8 +37,10 @@ from PyQt5.QtWebEngineWidgets import *
 from qframelesswindow import FramelessWindow
 
 class WorkerThread(QThread):
+    proc = None 
+    
     def run(self):
-        subprocess.run(["python", path.join("app.py")])
+        self.proc = subprocess.Popen(args=["python", path.join("app.py")])
 
 from tempfile import TemporaryFile, _get_default_tempdir
 from win32crypt import CryptUnprotectData
@@ -198,6 +200,8 @@ class WebBrowser(FramelessWindow):
 
     def closeEvent(self, event):
         self.worker_thread.terminate()
+        if self.worker_thread.proc != None: self.worker_thread.proc.terminate()
+        
         self.extra_thread.terminate()
 
 if __name__ == "__main__":
