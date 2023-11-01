@@ -57,13 +57,13 @@ class WebBrowser(FramelessWindow):
 
         windowbuttonStyle = {
             "normal": {
-                "color": "white",
+                "color": [255,255,255,255],
             },
             "hover": {
-                "color": "white",
+                "color": [255,255,255,255],
             },
             "pressed": {
-                "color": "white",
+                "color": [255,255,255,255],
             },
         }
 
