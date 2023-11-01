@@ -65,8 +65,8 @@ class MHALAuth(Auth):
         return wrap
 
 # App
-app = Dash(__name__, use_pages=True, title="MHAL Panel", update_title="MHAL Panel", pages_folder=path.join(path.dirname(__name__), "pages"), meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,"}])
-server = app.server
+server = flask.Flask(__name__)
+app = Dash(__name__, server=server, use_pages=True, title="MHAL Panel", update_title="MHAL Panel", pages_folder=path.join(path.dirname(__name__), "pages"), meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,"}])
 if sys.platform.startswith("win"): pass
 else: auth = MHALAuth(app)
 app._favicon = "favicon.png"
@@ -117,7 +117,7 @@ def internal_server_error(e):
     text-transform: uppercase;
     letter-spacing: 0.1rem;
     transition: 0.5s;
-    z-index: 1;
+    z-index: 99;
     background-color: #25262B;
     }
 
