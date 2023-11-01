@@ -55,20 +55,17 @@ class WebBrowser(FramelessWindow):
         # self.setWindowIcon('./Stark-icon.png')
         self.setStyleSheet("background-color: #1A1B1E; color: silver;")
 
-        # windowbuttonStyle = {
-        #     "normal": {
-        #         "color": QColor(r=192, g=192, b=192, a=255),
-        #         'background': QColor(r=16, g=20, b=31, a=255)
-        #     },
-        #     "hover": {
-        #         "color": QColor(r=255, g=255, b=255, a=255),
-        #         'background': QColor(r=45, g=50, b=79, a=255)
-        #     },
-        #     "pressed": {
-        #         "color": QColor(r=255, g=255, b=255, a=255),
-        #         'background': QColor(r=45, g=50, b=79, a=255)
-        #     },
-        # }
+        windowbuttonStyle = {
+            "normal": {
+                "color": "white",
+            },
+            "hover": {
+                "color": "white",
+            },
+            "pressed": {
+                "color": "white",
+            },
+        }
 
         closebuttonStyle = {
             "normal": {
@@ -85,8 +82,8 @@ class WebBrowser(FramelessWindow):
             },
         }
 
-        # self.titleBar.minBtn.updateStyle(windowbuttonStyle)
-        # self.titleBar.maxBtn.updateStyle(windowbuttonStyle)
+        self.titleBar.minBtn.updateStyle(windowbuttonStyle)
+        self.titleBar.maxBtn.updateStyle(windowbuttonStyle)
         self.titleBar.closeBtn.updateStyle(closebuttonStyle)
 
         self.browser = QWebEngineView()
