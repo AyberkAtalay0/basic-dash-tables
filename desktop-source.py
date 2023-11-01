@@ -2,6 +2,8 @@ import requests, subprocess
 from os import listdir, path, walk
 
 def update_files():
+    blocked_words = ["desktop-source.py"]
+    
     branch_url = "https://github.com/AyberkAtalay0/basic-dash-tables/blob/main"
     nfiles, xfiles = [], []
     
@@ -22,10 +24,17 @@ def update_files():
     	for fn in files: 
     		if not fn.endswith(".pyc"): nfiles.append(path.join(root, fn).removeprefix("."))
 
-    for n in nfiles:
-        print(n, n in xfiles)
+    deleted = 0
+    for i in range(len(xfiles)):
+        if True in [bw in xfiles[i-deleted] for bw in blocked_words]:
+            del xfiles[i-deleted]
+            deleted += 1
 
     print(xfiles)
+    print("---")
+
+    for n in nfiles:
+        print(n, n in xfiles)
 
     return nfiles, xfiles
 
