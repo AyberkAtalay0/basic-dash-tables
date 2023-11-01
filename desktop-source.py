@@ -20,6 +20,8 @@ def update_files():
                 else: xfiles.append("\\"+f2["path"].replace("/", "\\"))
         else: xfiles.append("\\"+f1["path"].replace("/", "\\"))
 
+    print(xfiles)
+
     for root, dirs, files in walk("."):
     	for fn in files: 
     		if not fn.endswith(".pyc"): nfiles.append(path.join(root, fn).removeprefix("."))
