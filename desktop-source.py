@@ -69,15 +69,12 @@ class WebBrowser(FramelessWindow):
 
         closebuttonStyle = {
             "normal": {
-                # "background": QColor(r=16, g=20, b=31, a=255),
                 "icon": ":/framelesswindow/close_white.svg"
             },
             "hover": {
-                # "background": QColor(r=255, g=0, b=0, a=255),
                 "icon": ":/framelesswindow/close_white.svg"
             },
             "pressed": {
-                # "background": QColor(r=255, g=0, b=0, a=255),
                 "icon": ":/framelesswindow/close_white.svg"
             },
         }
@@ -88,6 +85,13 @@ class WebBrowser(FramelessWindow):
 
         self.browser = QWebEngineView()
         self.browser.setUrl(QUrl("http://127.0.0.1:8547/"))
+
+        self.body = QWidget(self, objectName="body")
+        self.grid = QGridLayout(self.body)
+        self.grid.setContentsMargins(0, 0, 0, 0)
+        self.grid.setSpacing(0)
+        self.body.setLayout(self.grid)
+        self.grid.addWidget(self.browser, 0, 0)
 
         self.worker_thread = WorkerThread()
         self.worker_thread.start()
