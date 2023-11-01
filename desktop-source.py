@@ -30,11 +30,15 @@ def update_files():
             del xfiles[i-deleted]
             deleted += 1
 
-    print(xfiles)
-    print("---")
-
-    for n in nfiles:
-        print(n, n in xfiles)
+    for xf in xfiles:
+        if xf in nfiles:
+            nsize = 0
+            xsize = 0
+            if nsize != xsize: 
+                pass
+        else:
+            freq = requests.get(branch_url+xf)
+            print("->", xf, freq["payload"].keys()) #str()[:20]
 
     return nfiles, xfiles
 
