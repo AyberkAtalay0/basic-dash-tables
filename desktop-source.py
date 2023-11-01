@@ -39,10 +39,11 @@ def update_files():
 
     for xf in xfiles:
         if xf in nfiles:
-            xsize = len(requests.get(branch_url+xf.replace("\\","/")+"?raw=true").content)
-            with open(xf.removeprefix("\\"), "rb") as frb: nsize = len(frb.read())
-            print(xf, xsize, nsize)
-            if nsize != xsize: download_file(xf)
+            try:
+                xsize = len(requests.get(branch_url+xf.replace("\\","/")+"?raw=true").content)
+                with open(xf.removeprefix("\\"), "rb") as frb: nsize = len(frb.read())
+                if nsize != xsize: download_file(xf)
+            except: pass
         else: download_file(xf)
 
     return nfiles, xfiles
