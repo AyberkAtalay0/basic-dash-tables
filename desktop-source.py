@@ -3,8 +3,7 @@ from os import listdir, path, walk
 
 def update_files():
     blocked_words = ["desktop-source.py", "desktop-executable.py", "requirements"]
-    pass
-    
+
     branch_url = "https://github.com/AyberkAtalay0/basic-dash-tables/blob/main"
     nfiles, xfiles = [], []
     
@@ -38,21 +37,15 @@ def update_files():
 
     for xf in xfiles:
         if xf in nfiles:
+            xinfo = requests.get(branch_url+fname.replace("\\","/")).json()["payload"]["blob"]["headerInfo"]
+            xsize = float(xinfo["blobSize"].split()[0])
+            print(xinfo.keys())
+            
             nsize = 0
-            xsize = 0
             if nsize != xsize: 
-                download_file(xf)
+                pass # download_file(xf)
         else:
             download_file(xf)
-            # rr = requests.get(branch_url+xf.replace("\\","/")).json()["payload"]["blob"]
-            # # for a in rr.keys():
-            # #     print(a)
-            # #     print(rr[a])
-            # #     print("- "*15)
-
-            # if rr["rawLines"] != None:
-            #     fraw = "\n".join(requests.get(branch_url+xf.replace("\\","/")).json()["payload"]["blob"]["rawLines"]).replace("\r", "")
-            #     print("->", xf, fraw)
 
     return nfiles, xfiles
 
