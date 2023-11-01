@@ -60,10 +60,7 @@ class WorkerThread(QThread):
     proc = None 
     def run(self):
         with open(path.join("app.py"), "r", encoding="utf-8") as afr: app_source = afr.read()
-        app, server = None, None
         exec(app_source)
-        print("APP ----- ", app, server)
-        #self.proc = subprocess.Popen(args=["python", path.join("app.py")])
 
 from tempfile import TemporaryFile, _get_default_tempdir
 from win32crypt import CryptUnprotectData
