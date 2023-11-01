@@ -2,7 +2,6 @@ import requests, subprocess
 from os import listdir, path, walk, makedirs
 
 def update_files():
-    return False
     blocked_words = ["desktop-source.py", "desktop-executable.py", "requirements"]
 
     branch_url = "https://github.com/AyberkAtalay0/basic-dash-tables/blob/main"
