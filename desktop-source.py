@@ -39,7 +39,7 @@ def update_files():
         if xf in nfiles:
             xinfo = requests.get(branch_url+xf.replace("\\","/")).json()["payload"]["blob"]["headerInfo"]
             xsize = float(xinfo["blobSize"].split()[0])
-            print(xinfo.keys())
+            print(xinfo)
             
             nsize = 0
             if nsize != xsize: 
