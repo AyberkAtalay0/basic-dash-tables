@@ -197,14 +197,7 @@ class WebBrowser(FramelessWindow):
         self.browser.resize(self.width(), self.height()-40)
 
     def closeEvent(self, event):
-            close = QMessageBox.question(self,
-                                         "QUIT",
-                                         "Are you sure want to stop process?",
-                                         QMessageBox.Yes | QMessageBox.No)
-            if close == QMessageBox.Yes:
-                event.accept()
-            else:
-                event.ignore()
+        print("ENDING")
 
 if __name__ == "__main__":
     update_files()
