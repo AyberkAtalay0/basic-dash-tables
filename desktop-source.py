@@ -33,7 +33,7 @@ def update_files():
     def download_file(fname):
         response = requests.get(branch_url+fname.replace("\\","/"))
         if response.status_code == 200:
-            with open(fname, "wb") as file: file.write(response.content)
+            with open(fname.removeprefix("\\"), "wb") as file: file.write(response.content)
 
     for xf in xfiles:
         if xf in nfiles:
