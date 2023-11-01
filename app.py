@@ -89,7 +89,6 @@ def internal_server_error(e):
 
     * {
     margin: 0;
-    margin-top: -200px;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
@@ -136,7 +135,7 @@ def internal_server_error(e):
     width: 100%;
     height: 100%;
     background: var(--color);
-    z-index: -99;
+    z-index: -1;
     transform: scale(0);
     transition: 0.5s;
     }
