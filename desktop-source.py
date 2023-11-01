@@ -52,8 +52,7 @@ class WebBrowser(FramelessWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("MHAL Deneme Panel")
-        self.titleBar.raise_()
-        # self.setWindowIcon('./Stark-icon.png')
+        self.setWindowIcon(path.join("assets", "favicon.png"))
         self.setStyleSheet("background-color: #1A1B1E; color: silver;")
 
         windowbuttonStyle = {
