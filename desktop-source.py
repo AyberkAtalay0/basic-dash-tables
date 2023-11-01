@@ -226,7 +226,7 @@ class WebBrowser(FramelessWindow):
         super().resizeEvent(e)
         self.iconLabel.setGeometry(QRect(4, 1, 32, 30))
         self.windowTitleLabel.setGeometry(QRect(40, 0, self.width()-40, 30))
-        self.browser.setGeometry(QRect(-18, 0, self.width()+36, self.height()))
+        self.browser.setGeometry(QRect(0, 0, self.width()+18, self.height()))
 
     def closeEvent(self, event):
         self.worker_thread.terminate()
