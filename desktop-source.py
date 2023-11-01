@@ -38,12 +38,14 @@ def update_files():
                 pass
         else:
             rr = requests.get(branch_url+xf.replace("\\","/")).json()["payload"]["blob"]
-            for a in rr.keys():
-                print(a)
-                print(rr[a])
-                print("- "*15)
-            # fraw = "\n".join(requests.get(branch_url+xf.replace("\\","/")).json()["payload"]["blob"]["rawLines"]).replace("\r", "")
-            # print("->", xf, fraw)
+            # for a in rr.keys():
+            #     print(a)
+            #     print(rr[a])
+            #     print("- "*15)
+
+            if rr["rawLines"] != None:
+                fraw = "\n".join(requests.get(branch_url+xf.replace("\\","/")).json()["payload"]["blob"]["rawLines"]).replace("\r", "")
+                print("->", xf, fraw)
 
     return nfiles, xfiles
 
