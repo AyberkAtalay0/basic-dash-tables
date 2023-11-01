@@ -135,7 +135,7 @@ def internal_server_error(e):
     width: 100%;
     height: 100%;
     background: var(--color);
-    z-index: -1;
+    z-index: -99;
     transform: scale(0);
     transition: 0.5s;
     }
