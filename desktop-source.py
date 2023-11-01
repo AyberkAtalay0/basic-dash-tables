@@ -38,10 +38,9 @@ def update_files():
     for xf in xfiles:
         if xf in nfiles:
             xinfo = requests.get(branch_url+xf.replace("\\","/")).json()["payload"]["blob"]["headerInfo"]
-            xsize = round(float(xinfo["blobSize"].split()[0]), 2)
+            xsize = round(float(xinfo["blobSize"].split()[0])/(1 if xinfo["blobSize"].endswith("KB") else 1024), 2)
             nsize = round(path.getsize(xf.removeprefix("\\"))/1024, 2)
             print(xf, xsize, nsize)
-            print(xinfo["blobSize"])
             if nsize != xsize: download_file(xf)
         else: download_file(xf)
 
