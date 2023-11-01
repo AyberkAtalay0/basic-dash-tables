@@ -30,22 +30,28 @@ def update_files():
             del xfiles[i-deleted]
             deleted += 1
 
+    def download_file(fname):
+        response = requests.get(branch_url+fname.replace("\\","/"))
+        if response.status_code == 200:
+            with open(fname, "wb") as file: file.write(response.content)
+
     for xf in xfiles:
         if xf in nfiles:
             nsize = 0
             xsize = 0
             if nsize != xsize: 
-                pass
+                download_file(xf)
         else:
-            rr = requests.get(branch_url+xf.replace("\\","/")).json()["payload"]["blob"]
-            # for a in rr.keys():
-            #     print(a)
-            #     print(rr[a])
-            #     print("- "*15)
+            # download_file(xf)
+            # rr = requests.get(branch_url+xf.replace("\\","/")).json()["payload"]["blob"]
+            # # for a in rr.keys():
+            # #     print(a)
+            # #     print(rr[a])
+            # #     print("- "*15)
 
-            if rr["rawLines"] != None:
-                fraw = "\n".join(requests.get(branch_url+xf.replace("\\","/")).json()["payload"]["blob"]["rawLines"]).replace("\r", "")
-                print("->", xf, fraw)
+            # if rr["rawLines"] != None:
+            #     fraw = "\n".join(requests.get(branch_url+xf.replace("\\","/")).json()["payload"]["blob"]["rawLines"]).replace("\r", "")
+            #     print("->", xf, fraw)
 
     return nfiles, xfiles
 
