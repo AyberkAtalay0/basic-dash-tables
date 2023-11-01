@@ -5,9 +5,6 @@ from dash_auth.auth import Auth
 from datetime import datetime
 from os import listdir, path, getcwd
 
-print("[APP.PY -> Info]", listdir("."))
-print("[APP.PY -> Info]", getcwd())
-
 # Logs
 # log = logging.getLogger("werkzeug")
 # log.setLevel(logging.WARNING)
