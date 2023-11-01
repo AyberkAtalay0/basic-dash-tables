@@ -32,7 +32,7 @@ def update_files():
 
     def download_file(fname):
         try:
-            makedirs(path.dirname(fname).removeprefix("\\"), exist_ok=True)
+            if "\\" in fname.removeprefix("\\").removesuffix("\\"): makedirs(path.dirname(fname).removeprefix("\\"), exist_ok=True)
             response = requests.get(branch_url+fname.replace("\\","/")+"?raw=true")
             with open(fname.removeprefix("\\"), "wb") as file: file.write(response.content)
         except Exception as e: print(fname, str(e))
