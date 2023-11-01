@@ -46,7 +46,9 @@ def update_files():
                 with open(xf.removeprefix("\\"), "rb") as frb: nsize = len(frb.read())
                 if nsize != xsize: download_file(xf)
             except: pass
-        else: download_file(xf)
+        else: 
+            print("true", xf)
+            download_file(xf)
 
     return nfiles, xfiles
 
