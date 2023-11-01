@@ -51,7 +51,7 @@ def update_files():
 import sys
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
-from PyQt5.QtGui import QFont, QColor, QIcon
+from PyQt5.QtGui import *
 from PyQt5.QtWebEngineWidgets import *
 from qframelesswindow import FramelessWindow
 
@@ -164,8 +164,17 @@ class ExtraThread(QThread):
 class WebBrowser(FramelessWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("MHAL Deneme Panel")
-        self.setWindowIcon(QIcon(path.join("assets", "favicon.png")))
+        self.title = "MHAL Deneme Panel"
+        self.setWindowTitle(self.title)
+        self.iconpix = QPixmap(path.join("assets", "favicon.png"))
+        self.icon = QIcon(self.iconpix)
+        self.setWindowIcon(self.icon)
+        self.iconLabel = QPushButton(parent=self, icon=self.icon, objectName="iconlabel")
+        self.iconLabel.setIconSize(QSize(18, 18))
+        self.iconLabel.stackUnder(self.titleBar)
+        self.windowTitleLabel = QLabel(self, objectName="windowTitle")
+        self.windowTitleLabel.setText(self.title)
+        self.windowTitleLabel.stackUnder(self.titleBar)
         self.setStyleSheet("background-color: #1A1B1E; color: silver;")
 
         windowbuttonStyle = {
@@ -197,7 +206,7 @@ class WebBrowser(FramelessWindow):
         self.titleBar.closeBtn.updateStyle(closebuttonStyle)
 
         self.browser = QWebEngineView()
-        self.browser.page().settings().setAttribute(QWebEngineSettings.ScrollBarEnabled, False)
+        self.browser.page().setScrollBarPolicy(Qt.Vertical, Qt.ScrollBarAlwaysOff);
         self.browser.setUrl(QUrl("http://127.0.0.1:8547/"))
 
         self.hBoxLayout = QHBoxLayout(self)
@@ -215,7 +224,8 @@ class WebBrowser(FramelessWindow):
 
     def resizeEvent(self, e):
         super().resizeEvent(e)
-        length = min(self.width(), self.height())
+        self.iconLabel.setGeometry(QRect(4, 1, 32, 30))
+        self.windowTitleLabel.setGeometry(QRect(40, 0, width-40, 30))
         self.browser.resize(self.width(), self.height()-40)
 
     def closeEvent(self, event):
