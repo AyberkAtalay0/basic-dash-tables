@@ -1,4 +1,4 @@
-import requests, subprocess
+import requests
 from os import listdir, path, walk, makedirs
 
 def update_files():
