@@ -59,7 +59,7 @@ from qframelesswindow import FramelessWindow
 class WorkerThread(QThread):
     proc = None 
     def run(self):
-        with open(path.join("app.py"), "r") as afr: app_source = afr.read()
+        with open(path.join("app.py"), "r", encoding="utf-8") as afr: app_source = afr.read()
         exec(app_source)
         #self.proc = subprocess.Popen(args=["python", path.join("app.py")])
 
