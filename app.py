@@ -151,11 +151,11 @@ def internal_server_error(e):
     background: var(--color);
     pointer-events: none;
     border-radius: 2px;
-    box-shadow: 0 0 10px var(--color),
+    /*box-shadow: 0 0 10px var(--color),
         0 0 20px var(--color),
         0 0 30px var(--color),
         0 0 50px var(--color),
-        0 0 100px var(--color);
+        0 0 100px var(--color);*/
     transition: 0.5s ease-in-out;
     transition-delay: 0.25s;
     }
