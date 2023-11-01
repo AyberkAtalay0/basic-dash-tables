@@ -202,4 +202,4 @@ if __name__ == "__main__":
     qtapp = QApplication(sys.argv)
     window = WebBrowser()
     window.show()
-    qtapp.exec()
+    sys.exit(qtapp.exec())
