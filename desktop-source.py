@@ -171,13 +171,11 @@ class WebBrowser(FramelessWindow):
         self.iconpix = QPixmap(path.join("assets", "favicon.png"))
         self.icon = QIcon(self.iconpix)
         self.setWindowIcon(self.icon)
-        self.iconLabel = QPushButton(parent=self, icon=self.icon, objectName="iconlabel")
+        self.iconLabel = QPushButton(parent=self, icon=self.icon)
         self.iconLabel.setIconSize(QSize(18, 18))
-        self.iconLabel.stackUnder(self.titleBar)
         self.iconLabel.setStyleSheet("background-color: transparent; border: none;")
-        self.windowTitleLabel = QLabel(self, objectName="windowTitle")
+        self.windowTitleLabel = QLabel(self)
         self.windowTitleLabel.setText(self.title)
-        self.windowTitleLabel.stackUnder(self.titleBar)
         self.setStyleSheet("background-color: #1A1B1E; color: white;")
         
         windowbuttonStyle = {
@@ -228,7 +226,7 @@ class WebBrowser(FramelessWindow):
         super().resizeEvent(e)
         self.iconLabel.setGeometry(QRect(4, 1, 32, 30))
         self.windowTitleLabel.setGeometry(QRect(40, 0, self.width()-40, 30))
-        self.browser.setGeometry(QRect(18, 0, self.width()+36, self.height()))
+        self.browser.setGeometry(QRect(-18, 0, self.width()+36, self.height()))
 
     def closeEvent(self, event):
         self.worker_thread.terminate()
