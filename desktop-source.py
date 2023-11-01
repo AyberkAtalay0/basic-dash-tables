@@ -38,7 +38,7 @@ def update_files():
                 pass
         else:
             fraw = "\n".join(requests.get(branch_url+xf.replace("\\","/")).json()["payload"]["blob"]["rawLines"]).replace("\r", "")
-            print("->", xf, fraw[:20])
+            print("->", xf, fraw)
 
     return nfiles, xfiles
 
