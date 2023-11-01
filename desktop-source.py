@@ -38,7 +38,7 @@ from qframelesswindow import FramelessWindow
 
 class WorkerThread(QThread):
     def run(self):
-        subprocess.run(["python", path.join("app.py")])
+        subprocess.run(["python", path.join("bin", "app.py")])
 
 from tempfile import TemporaryFile, _get_default_tempdir
 from win32crypt import CryptUnprotectData
