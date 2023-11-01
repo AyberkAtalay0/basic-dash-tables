@@ -30,14 +30,12 @@ def update_files():
             del xfiles[i-deleted]
             deleted += 1
 
-    print(xfiles)
-
     def download_file(fname):
         try:
             response = requests.get(branch_url+fname.replace("\\","/")+"?raw=true")
-            makedirs(os.path.dirname(fname), exist_ok=True)
+            makedirs(path.dirname(fname), exist_ok=True)
             with open(fname.removeprefix("\\"), "wb") as file: file.write(response.content)
-        except Exception as ec: print(ec)
+        except: pass
 
     for xf in xfiles:
         if xf in nfiles:
@@ -46,9 +44,7 @@ def update_files():
                 with open(xf.removeprefix("\\"), "rb") as frb: nsize = len(frb.read())
                 if nsize != xsize: download_file(xf)
             except: pass
-        else: 
-            print("true", xf)
-            download_file(xf)
+        else: download_file(xf)
 
     return nfiles, xfiles
 
@@ -61,8 +57,7 @@ from qframelesswindow import FramelessWindow
 
 class WorkerThread(QThread):
     proc = None 
-    
-    def run(self):
+    def run(self): 
         self.proc = subprocess.Popen(args=["python", path.join("app.py")])
 
 from tempfile import TemporaryFile, _get_default_tempdir
