@@ -172,17 +172,11 @@ class WebBrowser(FramelessWindow):
         self.iconLabel = QPushButton(parent=self, icon=self.icon, objectName="iconlabel")
         self.iconLabel.setIconSize(QSize(18, 18))
         self.iconLabel.stackUnder(self.titleBar)
+        self.iconLabel.setStyleSheet("background-color: transparent; border: none;")
         self.windowTitleLabel = QLabel(self, objectName="windowTitle")
         self.windowTitleLabel.setText(self.title)
         self.windowTitleLabel.stackUnder(self.titleBar)
-        self.setStyleSheet("""
-        background-color: #1A1B1E; color: white;
-        
-        QPushButton#iconlabel {
-            background-color: transparent;
-            border: none;
-        }
-        """)
+        self.setStyleSheet("background-color: #1A1B1E; color: white;")
         
         windowbuttonStyle = {
             "normal": {
