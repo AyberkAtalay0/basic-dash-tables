@@ -38,7 +38,7 @@ def update_files():
                 pass
         else:
             freq = requests.get(branch_url+xf.replace("\\","/"))
-            print("->", xf, freq.json().keys/)) #str()[:20]
+            print("->", xf, freq.json().keys()) #str()[:20]
 
     return nfiles, xfiles
 
