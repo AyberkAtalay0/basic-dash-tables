@@ -56,6 +56,14 @@ from PyQt5.QtGui import QFont, QColor, QIcon
 from PyQt5.QtWebEngineWidgets import *
 from qframelesswindow import FramelessWindow
 
+import base64, flask, dash_mantine_components as dmc, sys
+from dash import Dash, page_container, Output, Input, State, html
+from dash_auth.auth import Auth
+from datetime import datetime
+from os import listdir, path, getcwd
+import pandas as pd
+from unidecode import unidecode as ud
+
 class WorkerThread(QThread):
     proc = None 
     def run(self):
