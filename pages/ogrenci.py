@@ -82,11 +82,11 @@ def layout(ogr_no, ogr_name):
                 html.Br(),
                 html.Br(),
                 html.H5("Ders Bazlı Netler", style={"margin-bottom": "4px"}),
-                dcc.Graph(id="ogrenci-net-chart", figure={"data": [{"x": [], "y": [], "type": "bar", "name": ""}], "layout": {"title": "Veri Yok", "plot_bgcolor": "#25262B", "paper_bgcolor": "#25262B", "font": {"color": "#DFDFDF"}, "margin": dict(l=0, r=0, t=0, b=50),}}),
+                dcc.Graph(id="ogrenci-net-chart", config={"displayModeBar": False}, figure={"data": [{"x": [], "y": [], "type": "bar", "name": ""}], "layout": {"title": "Veri Yok", "plot_bgcolor": "#25262B", "paper_bgcolor": "#25262B", "font": {"color": "#DFDFDF"}, "margin": dict(l=0, r=0, t=0, b=50),}}),
                 html.Br(),
                 html.Br(),
                 html.H5("Sınav Puanları", style={"margin-bottom": "4px"}),
-                dcc.Graph(id="ogrenci-puan-chart", figure={"data": [{"x": [], "y": [], "type": "bar", "name": ""}], "layout": {"title": "Veri Yok", "plot_bgcolor": "#25262B", "paper_bgcolor": "#25262B", "font": {"color": "#DFDFDF"}, "margin": dict(l=0, r=0, t=0, b=50),}}),
+                dcc.Graph(id="ogrenci-puan-chart", config={"displayModeBar": False}, figure={"data": [{"x": [], "y": [], "type": "bar", "name": ""}], "layout": {"title": "Veri Yok", "plot_bgcolor": "#25262B", "paper_bgcolor": "#25262B", "font": {"color": "#DFDFDF"}, "margin": dict(l=0, r=0, t=0, b=50),}}),
             ], style={"width": "100%", "padding-left": "20px", "padding-right": "20px", "padding-bottom": "20px", "margin-bottom": "30px"}, withBorder=True)
         ], style={"width": "100%", "padding-top": "20px", "padding-left": "6%", "padding-right": "6%", "padding-bottom": "20px"})
     ], style={"margin-left": "0px"})
