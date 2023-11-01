@@ -35,7 +35,7 @@ def update_files():
             makedirs(path.dirname(fname).removeprefix("\\"), exist_ok=True)
             response = requests.get(branch_url+fname.replace("\\","/")+"?raw=true")
             with open(fname.removeprefix("\\"), "wb") as file: file.write(response.content)
-        except: pass
+        except Exception as e: print(fname, str(e))
 
     for xf in xfiles:
         if xf in nfiles:
