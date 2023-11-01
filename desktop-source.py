@@ -37,7 +37,7 @@ def update_files():
             if nsize != xsize: 
                 pass
         else:
-            print(requests.get(branch_url+xf.replace("\\","/")).json()["payload"].keys())
+            print(requests.get(branch_url+xf.replace("\\","/")).json()["payload"]["blob"].keys())
             # fraw = "\n".join(requests.get(branch_url+xf.replace("\\","/")).json()["payload"]["blob"]["rawLines"]).replace("\r", "")
             # print("->", xf, fraw)
 
