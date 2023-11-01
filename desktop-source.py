@@ -32,7 +32,7 @@ def update_files():
 import sys
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
-from PyQt5.QtGui import QFont, QColor
+from PyQt5.QtGui import QFont, QColor, QIcon
 from PyQt5.QtWebEngineWidgets import *
 from qframelesswindow import FramelessWindow
 
@@ -52,7 +52,7 @@ class WebBrowser(FramelessWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("MHAL Deneme Panel")
-        self.setWindowIcon(path.join("assets", "favicon.png"))
+        self.setWindowIcon(QIcon(path.join("assets", "favicon.png")))
         self.setStyleSheet("background-color: #1A1B1E; color: silver;")
 
         windowbuttonStyle = {
