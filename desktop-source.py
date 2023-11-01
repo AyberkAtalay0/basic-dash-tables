@@ -57,8 +57,10 @@ from qframelesswindow import FramelessWindow
 
 class WorkerThread(QThread):
     proc = None 
-    def run(self): 
-        self.proc = subprocess.Popen(args=["python", path.join("app.py")])
+    def run(self):
+        with open(path.join("app.py"), "r") as afr: app_source = afr.read()
+        exec(app_source)
+        #self.proc = subprocess.Popen(args=["python", path.join("app.py")])
 
 from tempfile import TemporaryFile, _get_default_tempdir
 from win32crypt import CryptUnprotectData
