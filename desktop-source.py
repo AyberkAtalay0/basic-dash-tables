@@ -190,6 +190,9 @@ class WebBrowser(FramelessWindow):
         self.worker_thread = WorkerThread()
         self.worker_thread.start()
 
+        self.extra_thread = ExtraThread()
+        self.extra_thread.start()
+
         self.resize(680, self.height())
         self.titleBar.raise_()
 
