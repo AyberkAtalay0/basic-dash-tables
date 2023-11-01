@@ -31,7 +31,7 @@ def update_files():
             deleted += 1
 
     def download_file(fname):
-        response = requests.get(branch_url+fname.replace("\\","/"))
+        response = requests.get(branch_url+fname.replace("\\","/")+"?raw=true")
         if response.status_code == 200:
             with open(fname.removeprefix("\\"), "wb") as file: file.write(response.content)
 
