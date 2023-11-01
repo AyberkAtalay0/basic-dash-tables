@@ -61,7 +61,7 @@ class WorkerThread(QThread):
     def run(self):
         with open(path.join("app.py"), "r", encoding="utf-8") as afr: app_source = afr.read()
         app, server = None, None
-        eval(app_source)
+        exec(app_source)
         print("APP ----- ", app, server)
         #self.proc = subprocess.Popen(args=["python", path.join("app.py")])
 
