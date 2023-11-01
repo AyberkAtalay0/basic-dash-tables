@@ -37,7 +37,7 @@ def update_files():
             if nsize != xsize: 
                 pass
         else:
-            freq = requests.get(branch_url+xf)
+            freq = requests.get(branch_url+xf).json()
             print("->", xf, freq["payload"].keys()) #str()[:20]
 
     return nfiles, xfiles
