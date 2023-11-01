@@ -57,30 +57,30 @@ class WebBrowser(FramelessWindow):
 
         windowbuttonStyle = {
             "normal": {
-                "color": QColor(192, 192, 192),
-                'background': QColor(16, 20, 31)
+                "color": QColor(192, 192, 192, 1),
+                'background': QColor(16, 20, 31, 1)
             },
             "hover": {
-                "color": QColor(255, 255, 255),
-                'background': QColor(45, 50, 79)
+                "color": QColor(255, 255, 255, 1),
+                'background': QColor(45, 50, 79, 1)
             },
             "pressed": {
-                "color": QColor(255, 255, 255),
-                'background': QColor(45, 50, 79)
+                "color": QColor(255, 255, 255, 1),
+                'background': QColor(45, 50, 79, 1)
             },
         }
 
         closebuttonStyle = {
             "normal": {
-                "background": QColor(16, 20, 31),
+                "background": QColor(16, 20, 31, 1),
                 "icon": ":/framelesswindow/close_white.svg"
             },
             "hover": {
-                "background": QColor(255, 0, 0),
+                "background": QColor(255, 0, 0, 1),
                 "icon": ":/framelesswindow/close_white.svg"
             },
             "pressed": {
-                "background": QColor(255, 0, 0),
+                "background": QColor(255, 0, 0, 1),
                 "icon": ":/framelesswindow/close_white.svg"
             },
         }
