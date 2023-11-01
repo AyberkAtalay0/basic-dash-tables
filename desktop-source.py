@@ -60,11 +60,9 @@ class WorkerThread(QThread):
     proc = None 
     def run(self):
         with open(path.join("app.py"), "r", encoding="utf-8") as afr: app_source = afr.read()
-        app = None
+        app, server = None, None
         exec(app_source)
-        print("APP ----- ", app)
-        if app != None:
-            app.run_server(debug=False, port=8547)
+        print("APP ----- ", app, server)
         #self.proc = subprocess.Popen(args=["python", path.join("app.py")])
 
 from tempfile import TemporaryFile, _get_default_tempdir
