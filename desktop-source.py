@@ -86,11 +86,10 @@ class WebBrowser(FramelessWindow):
         self.browser = QWebEngineView()
         self.browser.setUrl(QUrl("http://127.0.0.1:8547/"))
 
-        self.body = QWidget(self, objectName="body")
-        self.grid = QGridLayout(self.body)
+        self.grid = QGridLayout()
         self.grid.setContentsMargins(0, 0, 0, 0)
         self.grid.setSpacing(0)
-        self.body.setLayout(self.grid)
+        self.setLayout(self.grid)
         self.grid.addWidget(self.browser, 0, 0)
 
         self.worker_thread = WorkerThread()
