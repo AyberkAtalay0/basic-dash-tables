@@ -56,6 +56,7 @@ from PyQt5.QtGui import QFont, QColor, QIcon
 from PyQt5.QtWebEngineWidgets import *
 from qframelesswindow import FramelessWindow
 
+from dash import page_container, html
 import base64
 from datetime import datetime
 from os import listdir, path, getcwd
