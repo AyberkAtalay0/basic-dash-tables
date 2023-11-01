@@ -3,9 +3,10 @@ import base64, flask, dash_mantine_components as dmc, sys
 from dash import Dash, page_container, Output, Input, State, html
 from dash_auth.auth import Auth
 from datetime import datetime
-from os import listdir, path
-import pandas as pd
-from unidecode import unidecode as ud
+from os import listdir, path, getcwd
+
+print("[APP.PY -> Info]", listdir("."))
+print("[APP.PY -> Info]", getcwd())
 
 # Logs
 # log = logging.getLogger("werkzeug")
@@ -66,10 +67,10 @@ class MHALAuth(Auth):
 
 # App
 server = flask.Flask(__name__)
-app = Dash(__name__, server=server, use_pages=True, title="MHAL Panel", update_title="MHAL Panel", pages_folder=path.join(path.dirname(__name__), "pages"), meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,"}])
+app = Dash(__name__, server=server, title="MHAL Panel", update_title="MHAL Panel", use_pages=True, pages_folder=path.join(getcwd(), "pages"), meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,"}])
 if sys.platform.startswith("win"): pass
 else: auth = MHALAuth(app)
-app._favicon = "favicon.png"
+app._favicon = path.join(getcwd(), "assets", "favicon.png")
 
 @server.errorhandler(500)
 def internal_server_error(e):
@@ -248,7 +249,7 @@ app.layout = dmc.MantineProvider(
     Input("sorgu-ogretim-yili", "value")
 )
 def indis_yenile(ogretim_yili):
-    return listdir(path.join("database", str(ogretim_yili))), listdir(path.join("database", str(ogretim_yili)))[-1] if len(listdir(path.join("database", str(ogretim_yili)))) > 0 else None
+    return [{"value": ind, "label": ind.removesuffix(".xlsx")} for ind in listdir(path.join("database", str(ogretim_yili)))], listdir(path.join("database", str(ogretim_yili)))[-1] if len(listdir(path.join("database", str(ogretim_yili)))) > 0 else None
 
 @app.callback(
     Output("sorgu-sinav-getir", "href"), 
@@ -265,6 +266,10 @@ def sinav_getir(indi, ogr_yili):
     State("sorgu-ogrenci-adi", "value"), State("sorgu-ogrenci-numarasi", "value"), State("sorgu-ogrenci-sinifi", "value")
 )
 def ogrenci_filtrele(n_clicks, ograd, ogrno, ogrsn):
+    import pandas as pd
+    from unidecode import unidecode as ud
+    from dash import html
+    import dash_mantine_components as dmc
     out, readies, order = [], [], []
     for ogry in listdir(path.join("database")):
         for xlsx in listdir(path.join("database", ogry)):
@@ -284,27 +289,34 @@ def ogrenci_filtrele(n_clicks, ograd, ogrno, ogrsn):
     for i in range(len(rows)): rows[i].style={"background-color": "transparent" if i%2 else "#2C2E33"}
     return rows
 
-def get_rows2(i, y):
-    out = []
-    for x in listdir(path.join("database", y)):
-        if x.endswith(".xlsx"):
-            df = pd.read_excel(path.join("database", y, x))
-            r = None
-            for id, di in enumerate(df["İsim"].tolist()):
-                if ud(di.lower().replace(" ","")) == ud(i.lower().replace(" ","")): r = id
-            if r != None: out.append([x.removesuffix(".xlsx")+" "+y]+df.iloc[r].tolist())
-    for o in range(len(out)):
-        del out[o][2]
-        del out[o][2]
-        del out[o][2]
-    return out
-
 @app.callback(
     Output("sonuc-ogrenci-table", "children"), Output("ogrenci-net-chart", "figure"), Output("ogrenci-puan-chart", "figure"),
     Input("sonuc-sorgu-getir", "n_clicks"),
     State("sonuc-ogretim-yili", "value"), State("ogrenci-bilgi-isim", "children"), State("ogrenci-bilgi-sinif", "children"), State("ogrenci-bilgi-numara", "children")
 )
 def sonuc_getir(n_clicks, ogr_yili, isim, sinif, numara):
+    from unidecode import unidecode as ud
+    import dash_mantine_components as dmc
+    from dash import html
+
+    def get_rows2(i, y):
+        import pandas as pd
+        from unidecode import unidecode as ud
+        
+        out = []
+        for x in listdir(path.join("database", y)):
+            if x.endswith(".xlsx"):
+                df = pd.read_excel(path.join("database", y, x))
+                r = None
+                for id, di in enumerate(df["İsim"].tolist()):
+                    if ud(di.lower().replace(" ","")) == ud(i.lower().replace(" ","")): r = id
+                if r != None: out.append([x.removesuffix(".xlsx")+" "+y]+df.iloc[r].tolist())
+        for o in range(len(out)):
+            del out[o][2]
+            del out[o][2]
+            del out[o][2]
+        return out
+
     rows = get_rows2(isim, ogr_yili)
 
     table = [html.Tr([html.Td(str(i)) for i in row] + [html.A(dmc.Button("Tablo"), href=f"/sinav/{ogr_yili}_{str(row[0]).split(' - ')[0].strip()}")], style={"background-color": "transparent" if rows.index(row)%2 else "#2C2E33"}) for row in rows]
@@ -344,5 +356,5 @@ def sonuc_getir(n_clicks, ogr_yili, isim, sinif, numara):
     }
     return table, net_fig, puan_fig
 
-if __name__ == "__main__":
-    app.run_server(debug=False, port=8547)
+# if __name__ == "__main__":
+app.run_server(debug=False, port=8547)
