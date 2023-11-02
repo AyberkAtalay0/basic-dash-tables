@@ -239,8 +239,6 @@ class WebBrowser(FramelessWindow):
 
     def closeEvent(self, event):
         self.worker_thread.terminate()
-        if self.worker_thread.proc != None: self.worker_thread.proc.terminate()
-        
         self.extra_thread.terminate()
 
 if __name__ == "__main__":
