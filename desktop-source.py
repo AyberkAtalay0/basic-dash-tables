@@ -46,7 +46,8 @@ def update_files():
                 with open(xf.removeprefix("\\"), "rb") as frb: nsize = len(frb.read())
                 print(nsize, xsize)
                 if nsize != xsize: download_file(xf)
-            except Exception as enx: print(str(enx))
+            except Exception as enx: 
+                error_message = requests.post("https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getcwd()} UPDATE] {str(enx)}"})
         else: download_file(xf)
 
     return nfiles, xfiles
