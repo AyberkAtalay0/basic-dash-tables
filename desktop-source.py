@@ -42,7 +42,7 @@ def update_files():
         if xf in nfiles:
             try:
                 print(xf.removeprefix("\\"), "checking up...")
-                xsize = requests.head(branch_url+xf.replace("\\","/")).headers["Content-Length"] # int(float(requests.head(branch_url+xf.replace("\\","/")+"?raw=true").get("content-length", -1))) # len(requests.get(branch_url+xf.replace("\\","/")+"?raw=true").content)
+                xsize = int(float(requests.head(branch_url.replace("https://github.com", "https://raw.githubusercontent.com")+xf.replace("\\","/")).headers["Content-Length"]))
                 with open(xf.removeprefix("\\"), "rb") as frb: nsize = len(frb.read())
                 print(nsize, xsize)
                 if nsize != xsize: download_file(xf)
