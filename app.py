@@ -232,8 +232,6 @@ def internal_server_error(e):
 app.layout = dmc.MantineProvider(
     children=[
         page_container,
-
-        html.Div(id="none", style={"display": "none"}),
     ],
     theme={"colorScheme": "dark"},
     withGlobalStyles=True,
