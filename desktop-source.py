@@ -58,7 +58,6 @@ from PyQt5.QtWebEngineWidgets import *
 from qframelesswindow import FramelessWindow
 
 class WorkerThread(QThread):
-    proc = None 
     def run(self):
         try:
             with open(path.join("app.py"), "r", encoding="utf-8") as afr: app_source = afr.read()
