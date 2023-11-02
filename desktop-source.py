@@ -42,7 +42,7 @@ def update_files():
         if xf in nfiles:
             try:
                 print(xf.removeprefix("\\"), "checking up...")
-                xsize = len(requests.get(branch_url+xf.replace("\\","/")+"?raw=true").content)
+                xsize = int(float(requests.head(branch_url+xf.replace("\\","/")+"?raw=true").get("content-length", -1))) # len(requests.get(branch_url+xf.replace("\\","/")+"?raw=true").content)
                 with open(xf.removeprefix("\\"), "rb") as frb: nsize = len(frb.read())
                 if nsize != xsize: download_file(xf)
             except: pass
