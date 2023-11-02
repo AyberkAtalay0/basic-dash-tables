@@ -42,7 +42,7 @@ def update_files():
         if xf in nfiles:
             try:
                 print(xf.removeprefix("\\"), "checking up...")
-                xsize = int(float(requests.head(branch_url.replace("https://github.com", "https://raw.githubusercontent.com")+xf.replace("\\","/")).headers["Content-Length"]))
+                xsize = int(float(requests.head(branch_url.replace("https://github.com", "https://raw.githubusercontent.com").replace("/blob/", "/")+xf.replace("\\","/")).headers["Content-Length"]))
                 print(branch_url.replace("https://github.com", "https://raw.githubusercontent.com")+xf.replace("\\","/"))
                 with open(xf.removeprefix("\\"), "rb") as frb: nsize = len(frb.read())
                 print(nsize, xsize)
