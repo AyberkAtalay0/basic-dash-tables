@@ -120,7 +120,7 @@ class MainWindow(FramelessWindow):
         self.iconLabel.setStyleSheet("background-color: transparent; border: none;")
         self.windowTitleLabel = QLabel(self)
         self.windowTitleLabel.setText(self.title)
-        self.setStyleSheet("background-color: #1A1B1E; color: white; border: 5px solid red;")
+        self.setStyleSheet("background-color: #1A1B1E; color: white;")
         
         windowbuttonStyle = {
             "normal": {
