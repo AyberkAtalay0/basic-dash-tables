@@ -132,7 +132,6 @@ class WebBrowser(FramelessWindow):
         self.browser = QWebEngineView()
         self.browser.setUrl(QUrl("http://127.0.0.1:8547/"))
         self.browser.page().settings().setAttribute(QWebEngineSettings.WebAttribute.ShowScrollBars, False)
-        # self.browser.page().mainFrame().setScrollBarPolicy(Qt.Vertical, Qt.ScrollBarAlwaysOff)
 
         self.hBoxLayout = QHBoxLayout(self)
         self.hBoxLayout.setContentsMargins(0, self.titleBar.height(), 0, 0)
@@ -155,7 +154,6 @@ class WebBrowser(FramelessWindow):
         super().resizeEvent(e)
         self.iconLabel.setGeometry(QRect(4, 1, 32, 30))
         self.windowTitleLabel.setGeometry(QRect(40, 0, self.width()-40, 30))
-        # self.browser.setGeometry(QRect(0, 36, self.width()+18, self.height()))
         self.browser.setGeometry(QRect(0, 36, self.width(), self.height()))
 
     def closeEvent(self, event):
