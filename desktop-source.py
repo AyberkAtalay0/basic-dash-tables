@@ -175,10 +175,8 @@ class MainWindow(FramelessWindow):
         self.titleBar.raise_()
 
     def giveMe(self, event=None):
-        print("singleshot ready")
-        QTimer.singleShot(2500, lambda: self.browser.setUrl(QUrl("http://127.0.0.1:8547/")))
-        QTimer.singleShot(3000, self.show)
-        print("singleshot sent")
+        QTimer.singleShot(2000, lambda: self.browser.setUrl(QUrl("http://127.0.0.1:8547/")))
+        QTimer.singleShot(2500, self.show)
         
     def resizeEvent(self, e):
         super().resizeEvent(e)
