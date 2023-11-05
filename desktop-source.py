@@ -159,7 +159,7 @@ class MainWindow(FramelessWindow):
         self.starter_thread.start_signal.connect(self.giveMe)
         self.starter_thread.start()
 
-        self.additional1_thread = EThread1()
+        self.additional1_thread = Additional1Thread()
         self.additional1_thread.start()
 
         self.resize(680, self.height())
