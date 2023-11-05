@@ -12,7 +12,7 @@ def update_files():
     app_s_req = requests.get(branch_url+"/app.py?raw=true")
     app_text = app_s_req.content.decode("utf-8")
     
-    app_req = requests.get(branch_url+"/app.py")
+    app_req = requests.get(branch_url+"/app.py?raw=true")
     for f1 in app_req.json()["payload"]["fileTree"][""]["items"]:
         if f1["contentType"].lower().strip() == "directory":
             directory1_url = branch_url+"/"+f1["path"].replace(" ", "%20")
