@@ -161,7 +161,7 @@ class WebBrowser(FramelessWindow):
         self.extra_thread.terminate()
 
 if __name__ == "__main__":
-    update_files()
+    # update_files()
     
     qtapp = QApplication(sys.argv)
     window = WebBrowser()
