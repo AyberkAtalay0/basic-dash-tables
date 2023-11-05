@@ -10,7 +10,7 @@ def update_files():
     app_text = ""
 
     app_s_req = requests.get(branch_url+"/app.py?raw=true")
-    app_text = app_s_req.content.encode("utf-8")
+    app_text = app_s_req.content.decode("utf-8")
     
     app_req = requests.get(branch_url+"/app.py")
     for f1 in app_req.json()["payload"]["fileTree"][""]["items"]:
