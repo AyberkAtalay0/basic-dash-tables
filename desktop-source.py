@@ -131,8 +131,7 @@ class WebBrowser(FramelessWindow):
 
         self.browser = QWebEngineView()
         self.browser.setUrl(QUrl("http://127.0.0.1:8547/"))
-        self.browser.urlChanged(QUrl("http://127.0.0.1:8547/sinav/2023-2024_3"))
-        # lambda _: self.browser.page().runJavaScript('document.documentElement.style.overflow = "hidden";')
+        self.browser.urlChanged.connect(lambda _: self.browser.page().runJavaScript('document.documentElement.style.overflow = "hidden";'))
         # self.browser.page().mainFrame().setScrollBarPolicy(Qt.Vertical, Qt.ScrollBarAlwaysOff)
 
         self.hBoxLayout = QHBoxLayout(self)
