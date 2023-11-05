@@ -131,8 +131,10 @@ class WebBrowser(FramelessWindow):
 
         self.browser = QWebEngineView()
         self.browser.setUrl(QUrl("http://127.0.0.1:8547/"))
-        print(dir(self.browser))
-        input("> ")
+        print(dir(self.browser.scroll))
+        input("1> ")
+        print(dir(self.browser.scroll()))
+        input("2> ")
         self.browser.page().mainFrame().setScrollBarPolicy(Qt.Vertical, Qt.ScrollBarAlwaysOff)
 
         self.hBoxLayout = QHBoxLayout(self)
