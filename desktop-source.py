@@ -124,9 +124,6 @@ class MainWindow(FramelessWindow):
         self.windowTitleLabel = QLabel(self)
         self.windowTitleLabel.setText(self.title)
         self.setStyleSheet("background-color: #1A1B1E; color: white;")
-
-        self.timer1 = QTimer(self)
-        self.timer1.timeout.connect(self.show)
         
         windowbuttonStyle = {
             "normal": {
@@ -179,7 +176,9 @@ class MainWindow(FramelessWindow):
         self.titleBar.raise_()
 
     def giveMe(self, event=None):
-        self.timer1.start(5000)
+        print("singleshot ready")
+        QTimer.singleShot(5*1000, self.show)
+        print("singleshot sent")
         
     def resizeEvent(self, e):
         super().resizeEvent(e)
