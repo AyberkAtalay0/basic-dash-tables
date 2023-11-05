@@ -105,10 +105,7 @@ class Additional1Thread(QThread):
             error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} A1] {str(a1)}"})
 
 class Browser(QWebEngineView):
-    def contextMenuEvent(self, event):
-        self.menu = QMenu()
-        self.menu.addAction("Allah allah")
-        self.menu.popup(event.globalPos())
+    def contextMenuEvent(self, event): pass
 
 class MainWindow(FramelessWindow):
     def __init__(self):
