@@ -2,11 +2,6 @@ body {
     background-color: #1A1B1E;
 }
 
-* {
-    -ms-overflow-style: none;  
-    scrollbar-width: none;
-}
-
 ::-webkit-scrollbar {
     display: none;
 }
