@@ -167,7 +167,7 @@ class MainWindow(FramelessWindow):
         self.hBoxLayout.addWidget(self.browser)
 
         self.starter_thread = StarterThread()
-        self.starter_thread.start_signal.connect(lambda _: self.timer1.start(3000))
+        self.starter_thread.start_signal.connect(self.giveMe)
         self.starter_thread.start()
 
         self.additional1_thread = Additional1Thread()
@@ -179,6 +179,9 @@ class MainWindow(FramelessWindow):
         self.browser.setGeometry(QRect(0, 36, self.width()+18, self.height()))
         
         self.titleBar.raise_()
+
+    def giveMe(self, event=None):
+        self.timer1.start(3000)
         
     def resizeEvent(self, e):
         super().resizeEvent(e)
