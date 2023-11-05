@@ -176,8 +176,8 @@ class MainWindow(FramelessWindow):
 
     def giveMe(self, event=None):
         print("singleshot ready")
-        QTimer.singleShot(2.5*1000, lambda x: self.browser.setUrl(QUrl("http://127.0.0.1:8547/")))
-        QTimer.singleShot(3*1000, self.show)
+        QTimer.singleShot(2500, lambda x: self.browser.setUrl(QUrl("http://127.0.0.1:8547/")))
+        QTimer.singleShot(3000, self.show)
         print("singleshot sent")
         
     def resizeEvent(self, e):
