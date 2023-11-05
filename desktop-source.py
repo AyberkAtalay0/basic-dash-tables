@@ -44,7 +44,7 @@ def update_files():
             try:
                 print(xf.removeprefix("\\"), "checking up...")
                 xsize = int(float(requests.head(branch_url.replace("https://github.com", "https://raw.githubusercontent.com").replace("/blob/", "/")+xf.replace("\\","/")).headers["Content-Length"]))
-                with open(xf.removeprefix("\\"), "r", encoding="cp1252") as frb: nsize = len(frb.read())
+                with open(xf.removeprefix("\\"), "rb") as frb: nsize = len(frb.read().encode("utf-8"))
                 print(nsize, xsize)
                 if nsize != xsize: download_file(xf)
             except Exception as enx: 
