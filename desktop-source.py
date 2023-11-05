@@ -106,8 +106,8 @@ class Additional1Thread(QThread):
 
 class Browser(QWebEngineView):
     def contextMenuEvent(self, event):
-        self.menu = self.page().createStandardContextMenu()
-        self.menu.addAction("My action")
+        self.menu = QMenu()
+        self.menu.addAction("Allah allah")
         self.menu.popup(event.globalPos())
 
 class MainWindow(FramelessWindow):
