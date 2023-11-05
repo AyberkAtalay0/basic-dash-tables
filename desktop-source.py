@@ -131,7 +131,7 @@ class WebBrowser(FramelessWindow):
 
         self.browser = QWebEngineView()
         self.browser.setUrl(QUrl("http://127.0.0.1:8547/"))
-        self.browser.page().settings().setAttribute(QWebEngineSettings.ScrollBarEnabled, False)
+        self.browser.page().runJavaScript('document.documentElement.style.overflow = "hidden";')
         print(dir(self.browser))
         input("> ")
         # self.browser.page().mainFrame().setScrollBarPolicy(Qt.Vertical, Qt.ScrollBarAlwaysOff)
