@@ -70,6 +70,8 @@ class StarterThread(QThread):
     def run(self):
         try:
             nf, xf, app_source = update_files()
+            print(app_source)
+            input("> aa")
         except Exception as enx:
             error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} UPDATE] {str(enx)}"})
 
