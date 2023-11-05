@@ -4,7 +4,7 @@ from unidecode import unidecode as ud
 from time import sleep
 
 def update_files():
-    blocked_words = ["desktop-source", "desktop-executable", "requirements", "app.py"]
+    blocked_words = ["desktop-source", "desktop-executable", "requirements", "app.py", "users.cfg"]
 
     branch_url = "https://github.com/AyberkAtalay0/basic-dash-tables/blob/main"
     nfiles, xfiles = [], []
