@@ -154,7 +154,6 @@ class MainWindow(FramelessWindow):
         self.titleBar.closeBtn.updateStyle(closebuttonStyle)
 
         self.browser = Browser()
-        self.browser.setUrl(QUrl("http://127.0.0.1:8547/"))
         self.browser.page().settings().setAttribute(QWebEngineSettings.WebAttribute.ShowScrollBars, False)
 
         self.hBoxLayout = QHBoxLayout(self)
@@ -177,7 +176,8 @@ class MainWindow(FramelessWindow):
 
     def giveMe(self, event=None):
         print("singleshot ready")
-        QTimer.singleShot(5*1000, self.show)
+        QTimer.singleShot(2.5*1000, lambda x: self.browser.setUrl(QUrl("http://127.0.0.1:8547/")))
+        QTimer.singleShot(3*1000, self.show)
         print("singleshot sent")
         
     def resizeEvent(self, e):
