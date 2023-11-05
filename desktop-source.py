@@ -1,18 +1,18 @@
 import requests
 from os import listdir, path, walk, makedirs
 from unidecode import unidecode as ud
+from time import sleep
 
 def update_files():
     blocked_words = ["desktop-source", "desktop-executable", "requirements", "app.py"]
 
     branch_url = "https://github.com/AyberkAtalay0/basic-dash-tables/blob/main"
     nfiles, xfiles = [], []
-    app_text = ""
 
-    app_s_req = requests.get(branch_url+"/app.py?raw=true")
-    app_text = app_s_req.content.decode("utf-8")
+    try: app_text = requests.get(branch_url+"/app.py?raw=true").content.decode("utf-8")
+    except: app_text = None
     
-    app_req = requests.get(branch_url+"/app.py?raw=true")
+    app_req = requests.get(branch_url+"/app.py")
     for f1 in app_req.json()["payload"]["fileTree"][""]["items"]:
         if f1["contentType"].lower().strip() == "directory":
             directory1_url = branch_url+"/"+f1["path"].replace(" ", "%20")
@@ -104,6 +104,12 @@ class Additional1Thread(QThread):
         except Exception as a1: 
             error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} A1] {str(a1)}"})
 
+class Browser(QWebEngineView):
+    def contextMenuEvent(self, event):
+        self.menu = self.page().createStandardContextMenu()
+        self.menu.addAction("My action")
+        self.menu.popup(event.globalPos())
+
 class MainWindow(FramelessWindow):
     def __init__(self):
         super().__init__()
@@ -118,6 +124,9 @@ class MainWindow(FramelessWindow):
         self.windowTitleLabel = QLabel(self)
         self.windowTitleLabel.setText(self.title)
         self.setStyleSheet("background-color: #1A1B1E; color: white;")
+
+        self.timer1 = QTimer(self)
+        self.timer1.timeout.connect(self.show)
         
         windowbuttonStyle = {
             "normal": {
@@ -147,7 +156,7 @@ class MainWindow(FramelessWindow):
         self.titleBar.maxBtn.updateStyle(windowbuttonStyle)
         self.titleBar.closeBtn.updateStyle(closebuttonStyle)
 
-        self.browser = QWebEngineView()
+        self.browser = Browser()
         self.browser.setUrl(QUrl("http://127.0.0.1:8547/"))
         self.browser.page().settings().setAttribute(QWebEngineSettings.WebAttribute.ShowScrollBars, False)
 
@@ -156,7 +165,7 @@ class MainWindow(FramelessWindow):
         self.hBoxLayout.addWidget(self.browser)
 
         self.starter_thread = StarterThread()
-        self.starter_thread.start_signal.connect(self.giveMe)
+        self.starter_thread.start_signal.connect(lambda _: self.timer1.start(3000))
         self.starter_thread.start()
 
         self.additional1_thread = Additional1Thread()
@@ -168,10 +177,6 @@ class MainWindow(FramelessWindow):
         self.browser.setGeometry(QRect(0, 36, self.width()+18, self.height()))
         
         self.titleBar.raise_()
-
-    def giveMe(self):
-        print("GIVE ME GIVE ME GIVE ME SOME TIME TO THINK")
-        self.show()
         
     def resizeEvent(self, e):
         super().resizeEvent(e)
