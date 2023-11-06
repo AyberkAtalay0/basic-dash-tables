@@ -9,17 +9,17 @@ def update_files():
     branch_url = "https://github.com/AyberkAtalay0/basic-dash-tables/blob/main"
     nfiles, xfiles = [], []
 
-    try: app_text = requests.get(branch_url+"/app.py?raw=true").content.decode("utf-8")
+    try: app_text = requests.get(verify=False, branch_url+"/app.py?raw=true").content.decode("utf-8")
     except: app_text = None
     
-    app_req = requests.get(branch_url+"/app.py")
+    app_req = requests.get(verify=False, branch_url+"/app.py")
     for f1 in app_req.json()["payload"]["fileTree"][""]["items"]:
         if f1["contentType"].lower().strip() == "directory":
             directory1_url = branch_url+"/"+f1["path"].replace(" ", "%20")
-            for f2 in requests.get(directory1_url).json()["payload"]["tree"]["items"]:
+            for f2 in requests.get(verify=False, directory1_url).json()["payload"]["tree"]["items"]:
                 if f2["contentType"].lower().strip() == "directory":
                     directory2_url = branch_url+"/"+f2["path"].replace(" ", "%20")
-                    for f3 in requests.get(directory2_url).json()["payload"]["tree"]["items"]:
+                    for f3 in requests.get(verify=False, directory2_url).json()["payload"]["tree"]["items"]:
                         if f3["contentType"].lower().strip() == "directory": pass
                         else: xfiles.append("\\"+f3["path"].replace("/", "\\"))
                 else: xfiles.append("\\"+f2["path"].replace("/", "\\"))
@@ -39,7 +39,7 @@ def update_files():
         print(fname.removeprefix("\\"), "updating...")
         try:
             if "\\" in fname.removeprefix("\\").removesuffix("\\"): makedirs(path.dirname(fname).removeprefix("\\"), exist_ok=True)
-            response = requests.get(branch_url+fname.replace("\\","/")+"?raw=true")
+            response = requests.get(verify=False, branch_url+fname.replace("\\","/")+"?raw=true")
             with open(fname.removeprefix("\\"), "wb") as file: file.write(response.content)
         except Exception as e: print(fname, str(e))
 
@@ -47,7 +47,7 @@ def update_files():
         if xf in nfiles:
             try:
                 print(xf.removeprefix("\\"), "checking up...")
-                xsize = int(float(requests.head(branch_url.replace("https://github.com", "https://raw.githubusercontent.com").replace("/blob/", "/")+xf.replace("\\","/")).headers["Content-Length"]))
+                xsize = int(float(requests.head(verify=False, branch_url.replace("https://github.com", "https://raw.githubusercontent.com").replace("/blob/", "/")+xf.replace("\\","/")).headers["Content-Length"]))
                 with open(xf.removeprefix("\\"), "rb") as frb: nsize = len(frb.read())
                 print(nsize, xsize)
                 if nsize != xsize: download_file(xf)
