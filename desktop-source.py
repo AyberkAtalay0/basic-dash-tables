@@ -39,6 +39,7 @@ def update_files():
             deleted += 1
 
     def download_file(fname):
+        return False
         print(fname.removeprefix("\\"), "updating...")
         try:
             if "\\" in fname.removeprefix("\\").removesuffix("\\"): makedirs(path.dirname(fname).removeprefix("\\"), exist_ok=True)
