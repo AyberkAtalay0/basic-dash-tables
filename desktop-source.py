@@ -162,7 +162,7 @@ class MainWindow(FramelessWindow):
         self.starter_thread.start()
 
         self.additional1_thread = Additional1Thread()
-        self.additional1_thread.start()
+        #self.additional1_thread.start()
 
         self.resize(680, self.height())
         self.iconLabel.setGeometry(QRect(4, 1, 32, 30))
