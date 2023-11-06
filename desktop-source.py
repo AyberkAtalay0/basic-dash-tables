@@ -3,6 +3,9 @@ from os import listdir, path, walk, makedirs
 from unidecode import unidecode as ud
 from time import sleep
 
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+
 def update_files():
     blocked_words = ["desktop-source", "desktop-executable", "requirements", "app.py", "users.cfg"]
 
