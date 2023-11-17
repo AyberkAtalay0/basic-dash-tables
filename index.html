@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cube</title>
+</head>
+<body>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        
+        .cube {
+            position: relative;
+            transform-style: preserve-3d;
+            transform: rotateX(-30deg) rotateY(-45deg);
+            width: 100px;
+            height: 100px;
+            animation: rotate 5s infinite linear;
+        }
+        
+        .face {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+        }
+        
+        #face1 { transform: rotateY(0deg) translateZ(50px); background-color: green; }
+        #face2 { transform: rotateY(90deg) translateZ(50px); background-color: greenyellow; }
+        #face3 { transform: rotateY(180deg) translateZ(50px); background-color: lime; }
+        #face4 { transform: rotateY(-90deg) translateZ(50px); background-color: aquamarine; }
+        #face5 { transform: rotateX(90deg) translateZ(50px); background-color: limegreen; }
+        #face6 { transform: rotateX(-90deg) translateZ(50px); background-color: aqua; }
+        
+        @keyframes rotate {
+            from { transform: rotateX(-30deg) rotateY(-45deg); }
+            to { transform: rotateX(-30deg) rotateY(315deg); }
+        }
+    </style>
+
+    <div class="cube" id="cube">
+        <div class="face" id="face1"></div>
+        <div class="face" id="face2"></div>
+        <div class="face" id="face3"></div>
+        <div class="face" id="face4"></div>
+        <div class="face" id="face5"></div>
+        <div class="face" id="face6"></div>
+    </div>
+</body>
+</html>
