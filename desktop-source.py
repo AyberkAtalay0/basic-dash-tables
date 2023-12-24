@@ -117,7 +117,9 @@ class Additional1Thread(QThread):
 
 class NotifyThread(QThread):
     def run(self):
-        system('mshta vbscript:Execute("MsgBox ""Güncellemeler kontrol ediliyor. Bu işlem bir dakikadan kısa sürecektir."", 64, ""MHAL Panel"":window.close")')
+        try:
+            system('mshta vbscript:Execute("MsgBox ""Güncellemeler kontrol ediliyor. Bu işlem bir dakikadan kısa sürecektir."", 64, ""MHAL Panel"":window.close")')
+        except: pass
         
 class Browser(QWebEngineView):
     def contextMenuEvent(self, event): pass
