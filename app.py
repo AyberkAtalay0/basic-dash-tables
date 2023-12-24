@@ -252,7 +252,6 @@ def indis_yenile(ogretim_yili):
     State("sorgu-ogretim-yili", "value")
 )
 def sinav_getir(indi, ogr_yili):
-    print("----------->>||||||", indi, ogr_yili)
     try: return f"sinav/{ogr_yili}_{indi.split(' - ')[0]}"
     except: return "sinav/x_x"
 
