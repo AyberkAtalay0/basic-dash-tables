@@ -21,7 +21,7 @@ def layout(ogr_yili, sinav_no):
     if type(df) != type(None):
         for r in range(len(df.index)):
             row = df.loc[r, :].values.flatten().tolist()[1:]
-            table.append(html.Tr([html.Td(str(row[-4]))] + [html.Td(str(i)) for i in row] + [html.A(dmc.Button("Profil"), href=f"/ogrenci/{row[0]}_{ud(row[1].lower().replace(' ',''))}")], style={"background-color": "transparent" if r%2 else "#2C2E33"}))
+            table.append(html.Tr([html.Td(str(row[-4]))] + [html.Td(str(i)) for i in row] + [html.A(dmc.Button("Profil"), href=f"/ogrenci/{row[0]}_{ud(str(row[1]).lower().replace(' ',''))}")], style={"background-color": "transparent" if r%2 else "#2C2E33"}))
     
     return html.Div(children=[
         html.Div(children=[
