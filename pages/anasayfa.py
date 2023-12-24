@@ -14,10 +14,10 @@ def layout():
         dmc.Card(children=[
             html.H3("Sınav Sorgu"),
             html.H5("Öğretim Yılı", style={"margin-bottom": "4px"}),
-            dmc.Select(placeholder="Select", id="sorgu-ogretim-yili", value=listdir(path.join("database"))[-1], data=[{"value":i, "label":i} for i in listdir("database")]),
+            dmc.Select(placeholder="Select", id="sorgu-ogretim-yili", value=listdir(path.join("database"))[-1], data=[{"value":i, "label":i} for i in sorted(listdir("database"))]),
             html.Br(),
             html.H5("Sınav İndisi", style={"margin-bottom": "4px"}),
-            dmc.Select(placeholder="Select", id="sorgu-sinav-indisi", value=listdir(path.join("database", listdir(path.join("database"))[-1]))[-1], data=[{"value":i, "label":i.removesuffix(".xlsx")} for i in listdir(path.join("database", listdir(path.join("database"))[-1]))]),
+            dmc.Select(placeholder="Select", id="sorgu-sinav-indisi", value=sorted(listdir(path.join("database", sorted(listdir(path.join("database")))[-1])))[-1], data=[{"value":i, "label":i.removesuffix(".xlsx")} for i in sorted(listdir(path.join("database", sorted(listdir(path.join("database")))[-1])))]),
             html.Br(),
             html.A(dmc.Button("Getir", style={"width": "100%"}), href="sinav/x_x", id="sorgu-sinav-getir")
         ], style={"width": "100%", "padding-left": "20px", "padding-right": "20px", "padding-bottom": "20px", "margin-bottom": "30px"}, withBorder=True),
