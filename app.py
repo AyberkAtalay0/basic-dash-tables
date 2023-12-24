@@ -312,6 +312,10 @@ def sonuc_getir(n_clicks, ogr_yili, isim, sinif, numara):
             del out[o][2]
             del out[o][2]
             del out[o][2]
+        for a in range(len(out)):
+            for b in range(len(out[a])):
+                if str(out[a][b]).replace("/","").isdigit():
+                    out[a][b] = out[a][b].split("/")[-1]
         return out
 
     rows = get_rows2(isim, ogr_yili)
