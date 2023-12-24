@@ -274,6 +274,7 @@ def ogrenci_filtrele(n_clicks, ograd, ogrno, ogrsn):
                     if (ud(str(ograd).replace("None","").replace(" ","").upper()) in ud(str(isim).replace(" ","").upper()) or ud(str(ograd).replace("None","").replace(" ","").upper()) == "") \
                         and (ud(str(ogrno).replace("None","").replace(" ","").upper()) in ud(str(numara).replace(" ","").upper()) or ud(str(ogrno).replace("None","").replace(" ","").upper()) == "") \
                             and (ud(str(ogrsn).replace("None","").replace(" ","").upper()) in ud(str(sinif).replace(" ","").upper()) or ud(str(ogrsn).replace("None","").replace(" ","").upper()) == ""):
+                        print(isim)
                         if isim.split()[0].strip() == isim.strip(): isim = isim + " X"
                         elem = html.Tr([html.Td(str(numara)), html.Td(isim.upper()), html.Td(sinif), html.A(children=dmc.Button("Profil"), href=f"/ogrenci/{numara}_{ud(isim.lower().replace(' ',''))}")])
                         if not (numara, isim, sinif) in readies:
