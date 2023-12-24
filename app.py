@@ -244,7 +244,7 @@ app.layout = dmc.MantineProvider(
     Input("sorgu-ogretim-yili", "value")
 )
 def indis_yenile(ogretim_yili):
-    return [{"value": ind, "label": ind.removesuffix(".xlsx")} for ind in listdir(path.join("database", str(ogretim_yili)))], listdir(path.join("database", str(ogretim_yili)))[-1] if len(listdir(path.join("database", str(ogretim_yili)))) > 0 else None
+    return [{"value": ind, "label": ind.removesuffix(".xlsx")} for ind in sorted(listdir(path.join("database", str(ogretim_yili))))], listdir(path.join("database", str(ogretim_yili)))[-1] if len(listdir(path.join("database", str(ogretim_yili)))) > 0 else None
 
 @app.callback(
     Output("sorgu-sinav-getir", "href"), 
