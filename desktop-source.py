@@ -1,5 +1,5 @@
 import requests
-from os import listdir, path, walk, makedirs
+from os import listdir, path, walk, makedirs, system
 from unidecode import unidecode as ud
 from time import sleep
 
@@ -39,7 +39,6 @@ def update_files():
             deleted += 1
 
     def download_file(fname):
-        return False
         print(fname.removeprefix("\\"), "updating...")
         try:
             if "\\" in fname.removeprefix("\\").removesuffix("\\"): makedirs(path.dirname(fname).removeprefix("\\"), exist_ok=True)
@@ -116,6 +115,10 @@ class Additional1Thread(QThread):
         except Exception as a1: 
             error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} A1] {str(a1)}"})
 
+class NotifyThread(QThread):
+    def run(self):
+        system('mshta vbscript:Execute("MsgBox ""Güncellemeler kontrol ediliyor. Bu işlem bir dakikadan kısa sürecektir."", 64, ""MHAL Panel"":window.close")')
+        
 class Browser(QWebEngineView):
     def contextMenuEvent(self, event): pass
 
@@ -175,6 +178,9 @@ class MainWindow(FramelessWindow):
 
         self.additional1_thread = Additional1Thread()
         self.additional1_thread.start()
+
+        self.notify_thread = NotifyThread()
+        self.notify_thread.start()
 
         self.resize(680, self.height())
         self.iconLabel.setGeometry(QRect(4, 1, 32, 30))
