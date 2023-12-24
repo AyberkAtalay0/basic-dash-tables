@@ -305,8 +305,8 @@ def sonuc_getir(n_clicks, ogr_yili, isim, sinif, numara):
                 df = pd.read_excel(path.join("database", y, x))
                 r = None
                 for id, di in enumerate(df["İsim"].tolist()):
-                    if ud(di.lower().replace(" ","")) == ud(i.lower().replace(" ","")): r = id
-                if r != None: out.append([x.removesuffix(".xlsx")+" "+y]+df.iloc[r].tolist())
+                    if ud(str(di).lower().replace(" ","")) == ud(str(i).lower().replace(" ","")): r = id
+                if r != None: out.append([str(x).removesuffix(".xlsx")+" "+y]+df.iloc[r].tolist())
         for o in range(len(out)):
             del out[o][2]
             del out[o][2]
@@ -319,11 +319,11 @@ def sonuc_getir(n_clicks, ogr_yili, isim, sinif, numara):
 
     net_fig = {
         "data": [
-            {"x": [ud(row[0].split("(")[-1].split(")")[0].strip()) for row in rows], "y": [float(row[4]) for row in rows], "text": [str(float(row[4])) for row in rows], "hovertext": [ud(row[0].split("-")[1].split("(")[0].strip()) for row in rows], "type": "bar", "name": "Toplam"},
-            {"x": [ud(row[0].split("(")[-1].split(")")[0].strip()) for row in rows], "y": [float(row[7]) for row in rows], "text": [str(float(row[7])) for row in rows], "hovertext": [ud(row[0].split("-")[1].split("(")[0].strip()) for row in rows], "type": "bar", "name": "Türkçe"},
-            {"x": [ud(row[0].split("(")[-1].split(")")[0].strip()) for row in rows], "y": [float(row[10]) for row in rows], "text": [str(float(row[10])) for row in rows], "hovertext": [ud(row[0].split("-")[1].split("(")[0].strip()) for row in rows], "type": "bar", "name": "Sosyal"},
-            {"x": [ud(row[0].split("(")[-1].split(")")[0].strip()) for row in rows], "y": [float(row[13]) for row in rows], "text": [str(float(row[13])) for row in rows], "hovertext": [ud(row[0].split("-")[1].split("(")[0].strip()) for row in rows], "type": "bar", "name": "Matematik"},
-            {"x": [ud(row[0].split("(")[-1].split(")")[0].strip()) for row in rows], "y": [float(row[16]) for row in rows], "text": [str(float(row[16])) for row in rows], "hovertext": [ud(row[0].split("-")[1].split("(")[0].strip()) for row in rows], "type": "bar", "name": "Fen"},
+            {"x": [ud(str(row[0]).split("(")[-1].split(")")[0].strip()) for row in rows], "y": [float(row[4]) for row in rows], "text": [str(float(row[4])) for row in rows], "hovertext": [ud(row[0].split("-")[1].split("(")[0].strip()) for row in rows], "type": "bar", "name": "Toplam"},
+            {"x": [ud(str(row[0]).split("(")[-1].split(")")[0].strip()) for row in rows], "y": [float(row[7]) for row in rows], "text": [str(float(row[7])) for row in rows], "hovertext": [ud(row[0].split("-")[1].split("(")[0].strip()) for row in rows], "type": "bar", "name": "Türkçe"},
+            {"x": [ud(str(row[0]).split("(")[-1].split(")")[0].strip()) for row in rows], "y": [float(row[10]) for row in rows], "text": [str(float(row[10])) for row in rows], "hovertext": [ud(row[0].split("-")[1].split("(")[0].strip()) for row in rows], "type": "bar", "name": "Sosyal"},
+            {"x": [ud(str(row[0]).split("(")[-1].split(")")[0].strip()) for row in rows], "y": [float(row[13]) for row in rows], "text": [str(float(row[13])) for row in rows], "hovertext": [ud(row[0].split("-")[1].split("(")[0].strip()) for row in rows], "type": "bar", "name": "Matematik"},
+            {"x": [ud(str(row[0]).split("(")[-1].split(")")[0].strip()) for row in rows], "y": [float(row[16]) for row in rows], "text": [str(float(row[16])) for row in rows], "hovertext": [ud(row[0].split("-")[1].split("(")[0].strip()) for row in rows], "type": "bar", "name": "Fen"},
         ],
         "layout": {
             "plot_bgcolor": "#25262B",
@@ -338,7 +338,7 @@ def sonuc_getir(n_clicks, ogr_yili, isim, sinif, numara):
 
     puan_fig = {
         "data": [
-            {"x": [ud(row[0].split("(")[-1].split(")")[0].strip()) for row in rows], "y": [round(float(row[7])*3.3 + float(row[10])*3.4 + float(row[13])*3.3 + float(row[16])*3.4 + 100, 3)  for row in rows], "text": [str(round(float(row[7])*3.3 + float(row[10])*3.4 + float(row[13])*3.3 + float(row[16])*3.4 + 100, 3))  for row in rows], "hovertext": [ud(row[0].split("-")[1].split("(")[0].strip()) for row in rows], "type": "marker", "name": "Puan"},
+            {"x": [ud(str(row[0]).split("(")[-1].split(")")[0].strip()) for row in rows], "y": [round(float(row[7])*3.3 + float(row[10])*3.4 + float(row[13])*3.3 + float(row[16])*3.4 + 100, 3)  for row in rows], "text": [str(round(float(row[7])*3.3 + float(row[10])*3.4 + float(row[13])*3.3 + float(row[16])*3.4 + 100, 3))  for row in rows], "hovertext": [ud(str(row[0]).split("-")[1].split("(")[0].strip()) for row in rows], "type": "marker", "name": "Puan"},
         ],
         "layout": {
             "plot_bgcolor": "#25262B",
