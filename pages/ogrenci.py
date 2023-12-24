@@ -16,7 +16,7 @@ def get_rows1(i):
                 df = pd.read_excel(path.join("database", y, x))
                 r = None
                 for id, di in enumerate(df["İsim"].tolist()):
-                    if ud(di.lower().replace(" ","")) == ud(i.lower().replace(" ","")): r = id
+                    if ud(str(di).lower().replace(" ","")) == ud(str(i).lower().replace(" ","")): r = id
                 if r != None: out.append(df.iloc[r].tolist()+[x.removesuffix(".xlsx")+" "+y])
     numaralar = [o[1] for o in out if float(o[1]) > 0]
     if len(numaralar) == 0: numaralar.append(0)
