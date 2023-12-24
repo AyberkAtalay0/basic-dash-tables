@@ -316,7 +316,7 @@ def sonuc_getir(n_clicks, ogr_yili, isim, sinif, numara):
             for b in range(len(out[a])):
                 if a < 10:
                     print(out[a][b], str(out[a][b]).replace("/","").isdigit() and "/" in str(out[a][b]))
-                if str(out[a][b]).replace("/","").isdigit() and "/" in str(out[a][b]):
+                if str(out[a][b]).replace("/","").replace(" ","").isdigit() and "/" in str(out[a][b]):
                     out[a][b] = int(float(str(out[a][b]).split("/")[0]))
         return out
 
