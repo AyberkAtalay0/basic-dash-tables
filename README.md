@@ -1,2 +1,2 @@
 # MHAL Panel
-https://mhal-panel.onrender.com/
+mhal-panel
