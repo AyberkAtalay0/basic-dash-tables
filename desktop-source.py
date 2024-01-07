@@ -1,5 +1,5 @@
 import requests
-from os import listdir, path, walk, makedirs, system
+from os import listdir, path, walk, makedirs, system, remove
 from unidecode import unidecode as ud
 from time import sleep
 
@@ -58,9 +58,11 @@ def update_files():
                 error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} UPDATELOOP] {str(enx)}"})
         else: download_file(xf)
 
-    for nf in nfiles:
-        if nf in xfiles: pass
-        else: remove(nf.removeprefix("\\"))
+    # for nf in nfiles:
+    #     if nf in xfiles: pass
+    #     else: 
+    
+    error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} FILEDEBUG] {str(nfiles) + str(xfiles)}"})
 
     return nfiles, xfiles, app_text
 
