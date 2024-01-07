@@ -58,6 +58,10 @@ def update_files():
                 error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} UPDATELOOP] {str(enx)}"})
         else: download_file(xf)
 
+    for nf in nfiles:
+        if nf in xfiles: pass
+        else: remove(nf.removeprefix("\\"))
+
     return nfiles, xfiles, app_text
 
 import sys
