@@ -60,12 +60,8 @@ def update_files():
 
     for nf in nfiles:
         if nf in xfiles: pass
-        else: 
-            print("Aaaaaaaaa", str(nf))
-            remove(str(nf).removeprefix("\\"))
-            
-    # error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} FILEDEBUG] {str(nfiles) + str(xfiles)}"})
-
+        else: remove(str(nf).removeprefix("\\"))
+    
     return nfiles, xfiles, app_text
 
 import sys
