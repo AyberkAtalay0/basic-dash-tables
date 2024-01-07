@@ -58,11 +58,13 @@ def update_files():
                 error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} UPDATELOOP] {str(enx)}"})
         else: download_file(xf)
 
-    # for nf in nfiles:
-    #     if nf in xfiles: pass
-    #     else: 
-    
-    error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} FILEDEBUG] {str(nfiles) + str(xfiles)}"})
+    for nf in nfiles:
+        if nf in xfiles: pass
+        else: 
+            print("Aaaaaaaaa", str(nf))
+            remove(str(nf).removeprefix("\\"))
+            
+    # error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} FILEDEBUG] {str(nfiles) + str(xfiles)}"})
 
     return nfiles, xfiles, app_text
 
