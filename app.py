@@ -244,7 +244,7 @@ app.layout = dmc.MantineProvider(
     Input("sorgu-ogretim-yili", "value")
 )
 def indis_yenile(ogretim_yili):
-    return [{"value": ind, "label": ind.removesuffix(".xlsx")} for ind in sorted(listdir(path.join("database", str(ogretim_yili))), key=lambda w: int(str(w[0])+str(w[1])+str(w[2])))], listdir(path.join("database", str(ogretim_yili)))[-1] if len(listdir(path.join("database", str(ogretim_yili)))) > 0 else None
+    return [{"value": ind, "label": ind.removesuffix(".xlsx")} for ind in sorted(listdir(path.join("database", str(ogretim_yili))), key=lambda w: int(str(w[0])+str(w[1])))], listdir(path.join("database", str(ogretim_yili)))[-1] if len(listdir(path.join("database", str(ogretim_yili)))) > 0 else None
 
 @app.callback(
     Output("sorgu-sinav-getir", "href"), 
@@ -300,7 +300,7 @@ def sonuc_getir(n_clicks, ogr_yili, isim, sinif, numara):
         from unidecode import unidecode as ud
         
         out = []
-        for x in sorted(listdir(path.join("database", y)), key=lambda w: int(str(w[0])+str(w[1])+str(w[2]))):
+        for x in sorted(listdir(path.join("database", y)), key=lambda w: int(str(w[0])+str(w[1]))):
             if x.endswith(".xlsx"):
                 df = pd.read_excel(path.join("database", y, x))
                 r = None
