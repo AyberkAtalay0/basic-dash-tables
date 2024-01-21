@@ -20,7 +20,7 @@ def get_rows1(i):
                 if r != None: 
                     al = df.iloc[r].tolist()
                     for ai in range(len(al)):
-                         if "bilinmiyor" in str(al[ai]): al[ai] = "12 / X"
+                         if "bilinmiyor" in str(al[ai]).lower(): al[ai] = "12 / X"
                     out.append(al+[x.removesuffix(".xlsx")+" "+y])
     numaralar = [o[1] for o in out if float(o[1]) > 0]
     if len(numaralar) == 0: numaralar.append(0)
