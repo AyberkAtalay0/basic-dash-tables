@@ -300,7 +300,7 @@ def sonuc_getir(n_clicks, ogr_yili, isim, sinif, numara):
         from unidecode import unidecode as ud
         
         out = []
-        for x in sorted(listdir(path.join("database", y))):
+        for x in sorted(listdir(path.join("database", y)), key=lambda w: int(str(w[0])+str(w[1])+str(w[2]))):
             if x.endswith(".xlsx"):
                 df = pd.read_excel(path.join("database", y, x))
                 r = None
