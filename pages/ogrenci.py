@@ -17,7 +17,11 @@ def get_rows1(i):
                 r = None
                 for id, di in enumerate(df["İsim"].tolist()):
                     if ud(str(di).lower().replace(" ","")) == ud(str(i).lower().replace(" ","")): r = id
-                if r != None: out.append(df.iloc[r].tolist()+[x.removesuffix(".xlsx")+" "+y])
+                if r != None: 
+                    al = df.iloc[r].tolist()
+                    for ai in range(len(al)):
+                         if "bilinmiyor" in str(al[ai]): al[ai] = "12 / X"
+                    out.append(al+[x.removesuffix(".xlsx")+" "+y])
     numaralar = [o[1] for o in out if float(o[1]) > 0]
     if len(numaralar) == 0: numaralar.append(0)
     isimler = [o[2] for o in out]
