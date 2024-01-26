@@ -52,7 +52,7 @@ def layout(ogr_yili, sinav_no):
                             ])
                         ),
                         html.Tbody(children=table),
-                    ], highlightOnHover=False, withBorder=True, style={"zoom": "80%"})
+                    ], highlightOnHover=False, withBorder=True, style={"zoom": "80%", "height": "5px"})
                 ], offsetScrollbars=False, style={"height": "900px"}),
                 dmc.ScrollArea(children=[
                     dmc.Table(children=[
