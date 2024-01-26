@@ -50,7 +50,7 @@ def layout(ogr_yili, sinav_no):
                             html.Th("Genel"),
                         ])
                     ),
-                    html.Tbody(children=table, id="ogrenci-sinav-table", style={"height": "1px"}),
+                    html.Tbody(children=table, id="ogrenci-sinav-table", style={"height": "500px"}),
                 ], highlightOnHover=False, withBorder=True, style={"zoom": "80%"}),
                 dmc.ScrollArea(children=[
                     dmc.Table(children=[
