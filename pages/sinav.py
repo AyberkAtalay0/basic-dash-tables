@@ -32,28 +32,6 @@ def layout(ogr_yili, sinav_no):
             html.Br(),
             dmc.Card(children=[
                 html.H3("Kurum Sonuçları"),
-                 dmc.ScrollArea(children=[
-                    dmc.Table(children=[
-                        html.Thead(
-                            html.Tr([
-                                html.Th("Sıra"),
-                                html.Th("Numara"),
-                                html.Th("İsim"),
-                                html.Th("Sınıf"),
-                                html.Th("D (Toplam)"), html.Th("Y (Toplam)"), html.Th("N (Toplam)"), 
-                                html.Th("D (Türkçe)"), html.Th("Y (Türkçe)"), html.Th("N (Türkçe)"),
-                                html.Th("D (Sosyal)"), html.Th("Y (Sosyal)"), html.Th("N (Sosyal)"),
-                                html.Th("D (Matematik)"), html.Th("Y (Matematik)"), html.Th("N (Matematik)"),
-                                html.Th("D (Fen)"), html.Th("Y (Fen)"), html.Th("N (Fen)"),
-                                html.Th("Kurum"),
-                                html.Th("İlçe"),
-                                html.Th("İl"),
-                                html.Th("Genel"),
-                            ])
-                        ),
-                        html.Tbody(children=table, style={"display": "none"}),
-                    ], highlightOnHover=False, withBorder=True, style={"zoom": "80%"})
-                ], offsetScrollbars=False, style={"height": "900px"}),
                 dmc.ScrollArea(children=[
                     dmc.Table(children=[
                         html.Thead(
