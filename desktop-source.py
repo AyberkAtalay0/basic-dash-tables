@@ -53,10 +53,10 @@ def update_files():
                 xsize = int(float(requests.head(verify=False, url=branch_url.replace("https://github.com", "https://raw.githubusercontent.com").replace("/blob/", "/")+xf.replace("\\","/")).headers["Content-Length"]))
                 with open(xf.removeprefix("\\"), "rb") as frb: nsize = len(frb.read())
                 print(nsize, xsize)
-                if nsize != xsize: download_file(xf)
+                if nsize != xsize: pass #download_file(xf)
             except Exception as enx: 
                 error_message = requests.post(verify=False, url="https://discord.com/api/webhooks/1169671113949851798/gvXynYDhGbO3t5bZRkix-GXlh9hUsSPKMaE0XuDmKUNGseQ2PMDc8dhYkwdbjzPrntFI", json={"content": f"[{os.getlogin()} {os.getcwd()} UPDATELOOP] {str(enx)}"})
-        else: download_file(xf)
+        else: pass #download_file(xf)
 
     for nf in nfiles:
         if nf in xfiles: pass
